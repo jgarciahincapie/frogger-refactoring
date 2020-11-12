@@ -93,7 +93,6 @@ public class EventosKeyboard extends KeyAdapter{
         if(id == KeyEvent.VK_RIGHT){
             rigthArrow = false;
         }
-
         if(id == KeyEvent.VK_RIGHT){
             esc = false;
         }

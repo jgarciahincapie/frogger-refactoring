@@ -15,17 +15,15 @@ public class Player {
 		sprite = Assets.playerNormal;
 	}
 	
-	public void Move() {
-		if(getY() > 50 && getY() < 550 || getX() > 50 && getX() < 700){			
-			if(EventosKeyboard.up)			
-				this.y -= speed;
-			else if(EventosKeyboard.down)
-				this.y += speed;
-			else if(EventosKeyboard.left)
-				this.x -= speed;
-			else if(EventosKeyboard.rigth)
-				this.x += speed;
-		}
+	public void Move() {		
+		if(EventosKeyboard.up && getY() > 25)			
+			this.y -= speed;
+		else if(EventosKeyboard.down && getY() < 500)
+			this.y += speed;
+		else if(EventosKeyboard.left && getX() > 25)
+			this.x -= speed;
+		else if(EventosKeyboard.rigth && getX() < 730)
+			this.x += speed;
 	}
 
 	public int getX() {
