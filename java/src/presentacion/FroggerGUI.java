@@ -86,7 +86,10 @@ public class FroggerGUI extends JFrame{
 	}
 	
 	private void actionsButtons() {
+		
+		//1 jugador
 		buttons[0].addMouseListener(new MouseListener() {
+
 			
 			@Override
 			public void mouseReleased(java.awt.event.MouseEvent e) {
@@ -117,5 +120,6 @@ public class FroggerGUI extends JFrame{
 				GameGUI gameGUI = new GameGUI();
 			}
 		});
+		//2 jugadores
 	}
 }

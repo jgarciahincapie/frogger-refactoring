@@ -29,7 +29,7 @@ public class Hilo extends Thread {
     public void run(){
         while(true){
         	try {
-    			sleep(2);
+    			sleep(3);
     		} catch (Exception e) {
     			e.printStackTrace();
     		}

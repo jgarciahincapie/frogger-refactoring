@@ -5,6 +5,8 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
+import com.sun.istack.internal.FinalArrayList;
+
 public class Assets {
 
 	//Menu principal
@@ -15,6 +17,9 @@ public class Assets {
 	public static BufferedImage iaviaButton;
 	public static BufferedImage froggy;
 	public static BufferedImage playerNormal;
+	
+	//Plataformas
+	public static BufferedImage trunk;
 	
 	public static void Start(){
 		try {
@@ -28,6 +33,7 @@ public class Assets {
 			
 			//Game
 			playerNormal = ImageIO.read(new File("Assets/Players/player.png"));
+			trunk = ImageIO.read(new File("Assets/Platforms/trunk.png"));
 			
 		} catch (Exception e) {
 			e.printStackTrace();

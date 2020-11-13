@@ -11,12 +11,15 @@ import aplicacion.EventosKeyboard;
 import aplicacion.EventosKeyboard;
 import aplicacion.FroggerManager;
 import aplicacion.Player;
+import aplicacion.Trunk;
 
 public class GameGUI extends JFrame{
 	
 	private FroggerManager manager;
-	private Player player1;
 	private JPanel background = new JPanel();
+	//To Draw
+	private Player player1;
+	private Trunk[] trunks;
 	
 
 	public GameGUI() {
@@ -33,13 +36,26 @@ public class GameGUI extends JFrame{
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+		
+		//Player
 		g.drawImage(player1.getSprite(), player1.getX(), player1.getY(), 50, 50, null);
+		
+		//Trunks
+		for(Trunk trunk: trunks) {
+			//Corregir tronquitos
+			g.drawImage(trunk.getSprite(), trunk.getX(), trunk.getY(), 100, 50, null);
+		}
+		
+		//Scorer
+		g.setColor(Color.white);
+		g.drawString("Score: 0", 350, 550);
 		Toolkit.getDefaultToolkit().sync();
 		validate();
 	}
 	
-	public void toDraw(Player player1) {
+	public void toDraw(Player player1, Trunk[] trunks) {
 		this.player1 = player1; 
+		this.trunks = trunks;
 	} 
 	
 	private void windowSettings() {
