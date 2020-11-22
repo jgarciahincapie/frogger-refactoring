@@ -1,14 +1,20 @@
 package aplicacion;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import com.sun.glass.ui.Timer;
+
 import presentacion.GameGUI;
 
 /**
  * Unico Thread en el que se ejecuta el juego activo
  */
-public class Hilo extends Thread {
+public class Hilo extends Thread{
 
     FroggerManager froggerManager;
     GameGUI gameGUI;
+    Timer timer;
 
     private boolean playing;
 
@@ -27,15 +33,14 @@ public class Hilo extends Thread {
      */
     @Override
     public void run(){
-        while(true){
-        	try {
-    			sleep(3);
-    		} catch (Exception e) {
-    			e.printStackTrace();
-    		}
-            froggerManager.Update();
-            gameGUI.repaint();
-        }
+       while(true) {
+    	   try {
+    		   sleep(10);		
+		} catch (Exception e) {
+		}
+    	   froggerManager.Update();
+    	   gameGUI.repaint();
+       }
     }
 
     /**
