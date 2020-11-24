@@ -14,6 +14,7 @@ public class FroggerManager {
 	private	Car[] cars;
 	private	StopPlace[] stopPlaces;
 	private	Turtle[] turtles;
+	private River river;
 
 	//Configuracion juego
 	private int mode;
@@ -22,6 +23,7 @@ public class FroggerManager {
 	private int time;
 	private int cont;
 	private int lives;
+	private boolean swiming;
 
 	//Sistema Update
 	private Hilo thread;
@@ -57,9 +59,9 @@ public class FroggerManager {
 		cars = new Car[] {new Car(true, 800, 450, 1), new Car(false, 0, 400, 1), new Car(true, 800, 350, 1)};
 		turtles = new Turtle[] {
 				//Grupo 1
-				new Turtle(true, 0, 200, 2), 
+				new Turtle(true, 0, 200, 2),
 				new Turtle(true, 50, 200, 2), 
-				new Turtle(true, 100, 200, 2), 
+				new Turtle(true, 100, 200, 2),
 				//Grupo 2
 				new Turtle(true, 300, 200, 2), 
 				new Turtle(true, 350, 200, 2),
@@ -84,7 +86,9 @@ public class FroggerManager {
 	private void Reset(GameGUI gameGUI) {
 		//Objetos para dibujar
 		playerOne = new Player();
-		gameGUI.toDraw(playerOne, trunks, cars, stopPlaces, turtles);
+		river = new River();
+		swiming = false;
+		gameGUI.toDraw(playerOne, trunks, cars, stopPlaces, turtles, river);
 
 		//Variables
 		this.gameGUI = gameGUI;
@@ -121,11 +125,11 @@ public class FroggerManager {
 		}
 	}
 
-	private void DetectCollision() {
+	private void DetectCollision() {		
 		//Carros
 		for(Car car: cars) {
 			if(Collision(car.getCollider(), playerOne.getCollider())) {
-				playerOne.Dead();
+				playerOne.OnCollisionEnter(car);
 				try {
 					thread.join(1000);
 					LoseLive();
@@ -138,19 +142,31 @@ public class FroggerManager {
 		//Trunks
 		for(Trunk trunk: trunks) {
 			if(Collision(trunk.getCollider(), playerOne.getCollider())) {
-				playerOne.setX((int)trunk.getCollider().getCenterX() - playerOne.getWidth()/2);
+				playerOne.OnCollisionEnter(trunk);
+				playerOne.setRiding(true);
 			}
 		}
 
 		//FinalStops
 		for(StopPlace stopPlace: stopPlaces) {
 			if(Collision(stopPlace.getCollider(), playerOne.getCollider())) {
-				if(!stopPlace.isTrigger()) {					
+				if(!stopPlace.isTrigger()) {
+					swiming = false;
 					stopPlace.Win();
 					Win();
 				}
 			}
 		}
+		
+		//Turtles
+		for(Turtle tt: turtles) {
+			if(Collision(tt.getCollider(), playerOne.getCollider())) {
+				if(!tt.isTrigger()) {
+					playerOne.OnCollisionEnter(tt);
+				}
+			}
+		}
+		
 	}
 
 	private boolean Collision(Rectangle2D col1, Rectangle2D col2) {

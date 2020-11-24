@@ -17,6 +17,7 @@ public class Player {
 	private double speedX;
 	private boolean isTrigger;
 	private boolean isAlive;
+	private boolean isRiding;
 
 	public Player() {
 		x = 380;
@@ -27,6 +28,7 @@ public class Player {
 		height = 50;
 		isTrigger = false;
 		isAlive = true;
+		isRiding = false;
 		sprite = Assets.playerNormal;
 	}
 	
@@ -54,8 +56,27 @@ public class Player {
 		sprite = Assets.playerDead;
 	}
 	
+	public void OnCollisionEnter(Collisionable collision) {
+		if(collision.getTag() == "trunk" || collision.getTag() == "turtle") {
+			setX((int)collision.getCollider().getCenterX() - getWidth()/2);
+		}
+		
+		if(collision.getTag() == "car") {
+			Dead();
+		}
+	}
+	
 	public Rectangle2D getCollider() {
 		return new Rectangle2D.Double(x, y, width, height);
+	}
+
+	
+	public boolean isRiding() {
+		return isRiding;
+	}
+
+	public void setRiding(boolean isRiding) {
+		this.isRiding = isRiding;
 	}
 
 	public int getX() {
@@ -81,7 +102,6 @@ public class Player {
 	public BufferedImage getSprite(){
 		return this.sprite;
 	}
-
 
 	public int getWidth() {
 		return width;

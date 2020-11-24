@@ -17,6 +17,7 @@ public class GameGUI extends JFrame{
 	private Car[] cars;
 	private StopPlace[] stopPlaces;
 	private Turtle[] turtles;
+	private River river;
 
 	public GameGUI() {
 		Assets.Start();
@@ -35,6 +36,9 @@ public class GameGUI extends JFrame{
 	public void paint(Graphics g) {		
 		super.paintComponents(g);
 		
+		//River
+		g.drawImage(river.getSprite(), river.getX(), river.getY(), river.getWidth(), river.getHeight(), null);
+				
 		//Trunks
 		for(Trunk trunk: trunks) {
 			g.drawImage(trunk.getSprite(), trunk.getX(), trunk.getY(), trunk.getWidth(), trunk.getHeight(), null);
@@ -53,7 +57,6 @@ public class GameGUI extends JFrame{
 		for(Turtle tt: turtles) {
 			g.drawImage(tt.getSprite(), tt.getX(), tt.getY(), tt.getWidth(), tt.getHeight(), null);
 		}
-		
 		//Score & Time
 		g.setColor(Color.white);
 		g.setFont(new Font("Serif", Font.BOLD, 30));
@@ -77,12 +80,13 @@ public class GameGUI extends JFrame{
 		validate();
 	}
 	
-	public void toDraw(Player player1, Trunk[] trunks, Car[] cars, StopPlace[] stopPlaces, Turtle[] turtles) {
+	public void toDraw(Player player1, Trunk[] trunks, Car[] cars, StopPlace[] stopPlaces, Turtle[] turtles, River river) {
 		this.player1 = player1; 
 		this.trunks = trunks;
 		this.cars = cars;
 		this.stopPlaces = stopPlaces;
 		this.turtles = turtles;
+		this.river = river;
 	} 
 	
 	private void windowSettings() {

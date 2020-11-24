@@ -26,6 +26,7 @@ public class Assets {
 	public static BufferedImage grass;
 	public static BufferedImage finalGrass;
 	public static BufferedImage stopPlace;
+	public static BufferedImage river;
 	
 	//Cars
 	public static BufferedImage carYellow;
@@ -52,6 +53,7 @@ public class Assets {
 			grass = ImageIO.read(new File("Assets/Platforms/grass.png"));
 			finalGrass = ImageIO.read(new File("Assets/Platforms/finalGrass.png"));
 			stopPlace = ImageIO.read(new File("Assets/Platforms/stopPlace.png"));
+			river = ImageIO.read(new File("Assets/UI/river.png"));
 			
 			//Cars
 			carYellow = ImageIO.read(new File("Assets/Cars/carYellow.png"));
