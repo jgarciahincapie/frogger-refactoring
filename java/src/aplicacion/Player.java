@@ -19,9 +19,9 @@ public class Player {
 	private boolean isAlive;
 	private boolean isRiding;
 
-	public Player() {
-		x = 380;
-		y = 500;
+	public Player(int x, int y) {
+		this.x = x;
+		this.y = y;
 		speedX = 15;
 		speedY = 50;
 		width = 50;
@@ -59,6 +59,10 @@ public class Player {
 	public void OnCollisionEnter(Collisionable collision) {
 		if(collision.getTag() == "trunk" || collision.getTag() == "turtle") {
 			setX((int)collision.getCollider().getCenterX() - getWidth()/2);
+		}
+		
+		if(collision.getTag() == "river") {
+			Dead();
 		}
 		
 		if(collision.getTag() == "car") {

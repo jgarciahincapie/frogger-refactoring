@@ -10,6 +10,7 @@ public class FroggerManager {
 
 	//Game
 	private Player playerOne;
+	private Player playerTwo;
 	private	Trunk[] trunks;
 	private	Car[] cars;
 	private	StopPlace[] stopPlaces;
@@ -32,46 +33,47 @@ public class FroggerManager {
 
 	public FroggerManager(int mode,GameGUI gameGUI){
 		this.gameGUI = gameGUI;
+		System.out.print(GameSettings.mode);
 		Start();
 	}
 
 	//Instancia una unica vez
 	private void Start() {
 		//Instanciar todos los objetoss
-		stopPlaces = new StopPlace[] {new StopPlace(30, 50), new StopPlace(200, 50), new StopPlace(370, 50), new StopPlace(540, 50), new StopPlace(710, 50)};
+		stopPlaces = new StopPlace[] {new StopPlace(30, 30), new StopPlace(200, 30), new StopPlace(370, 30), new StopPlace(540, 30), new StopPlace(710, 30)};
 		trunks = new Trunk[] {
 				//Largos inferiores
-				new Trunk(false, 0, 150, 170, 2), 
-				new Trunk(false, -300, 150, 170, 2), 
-				new Trunk(false, -600, 150, 170,  2),
+				new Trunk(false, 0, 130, 170, 2), 
+				new Trunk(false, -300, 130, 170, 2), 
+				new Trunk(false, -600, 130, 170,  2),
 				//Largos superiores
-				new Trunk(true, 900, 100, 180, 1), 
-				new Trunk(true, 300, 100, 180, 1), 
-				new Trunk(true, 600, 100, 180,  1),
+				new Trunk(true, 900, 80, 180, 1), 
+				new Trunk(true, 300, 80, 180, 1), 
+				new Trunk(true, 600, 80, 180,  1),
 				//Medianos
-				new Trunk(false, -100, 250, 100, 1), 
-				new Trunk(false, -300, 250, 100, 1), 
-				new Trunk(false, -500, 250, 100, 1), 
+				new Trunk(false, -100, 230, 100, 1), 
+				new Trunk(false, -300, 230, 100, 1), 
+				new Trunk(false, -500, 230, 100, 1), 
 				//Pequeños
-				new Trunk(false, -650, 250, 50,  1), 
-				new Trunk(false, -800, 250, 50,  1)
+				new Trunk(false, -650, 230, 50,  1), 
+				new Trunk(false, -800, 230, 50,  1)
 		};
-		cars = new Car[] {new Car(true, 800, 450, 1), new Car(false, 0, 400, 1), new Car(true, 800, 350, 1)};
+		cars = new Car[] {new Car(true, 800, 430, 1), new Car(false, 0, 380, 1), new Car(true, 800, 330, 1)};
 		turtles = new Turtle[] {
 				//Grupo 1
-				new Turtle(true, 0, 200, 2),
-				new Turtle(true, 50, 200, 2), 
-				new Turtle(true, 100, 200, 2),
+				new Turtle(true, 0, 180, 2),
+				new Turtle(true, 50, 180, 2), 
+				new Turtle(true, 100, 180, 2),
 				//Grupo 2
-				new Turtle(true, 300, 200, 2), 
-				new Turtle(true, 350, 200, 2),
+				new Turtle(true, 300, 180, 2), 
+				new Turtle(true, 350, 180, 2),
 				//Grupo 3
-				new Turtle(true, 550, 200, 2), 
-				new Turtle(true, 600, 200, 2), 
-				new Turtle(true, 650, 200, 2), 
+				new Turtle(true, 550, 180, 2), 
+				new Turtle(true, 600, 180, 2), 
+				new Turtle(true, 650, 180, 2), 
 				//Grupo 4
-				new Turtle(true, 950, 200, 2), 
-				new Turtle(true, 1000, 200, 2),
+				new Turtle(true, 950, 180, 2), 
+				new Turtle(true, 1000, 180, 2),
 		};
 
 		//Update
@@ -85,7 +87,7 @@ public class FroggerManager {
 
 	private void Reset(GameGUI gameGUI) {
 		//Objetos para dibujar
-		playerOne = new Player();
+		playerOne = new Player(380, 480);
 		river = new River();
 		swiming = false;
 		gameGUI.toDraw(playerOne, trunks, cars, stopPlaces, turtles, river);
@@ -126,6 +128,7 @@ public class FroggerManager {
 	}
 
 	private void DetectCollision() {		
+		
 		//Carros
 		for(Car car: cars) {
 			if(Collision(car.getCollider(), playerOne.getCollider())) {

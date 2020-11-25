@@ -1,8 +1,5 @@
 package aplicacion;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import com.sun.glass.ui.Timer;
 
 import presentacion.GameGUI;

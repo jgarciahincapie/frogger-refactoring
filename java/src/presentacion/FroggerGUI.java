@@ -22,6 +22,7 @@ import com.sun.glass.events.MouseEvent;
 import com.sun.xml.internal.ws.api.server.Container;
 import com.sun.xml.internal.ws.wsdl.ActionBasedOperationSignature;
 
+import aplicacion.GameSettings;
 import javafx.scene.layout.Border;
 
 public class FroggerGUI extends JFrame{
@@ -30,6 +31,7 @@ public class FroggerGUI extends JFrame{
 	private JLabel title = new JLabel("FROGGER");
 	private JLabel[] froggys;
 	private JLabel[] buttons;
+	private JFrame instance;
 	
 	public static void main(String[] args) {
 		FroggerGUI froggerGUI = new FroggerGUI();
@@ -37,7 +39,7 @@ public class FroggerGUI extends JFrame{
 
 	public FroggerGUI() {
 		Assets.Start();
-		
+		instance = this;
 		//JFrame
 		setName("Frogger ");
 		setSize(800,600);
@@ -81,10 +83,6 @@ public class FroggerGUI extends JFrame{
 		container.add(title, BorderLayout.NORTH);
 	}
 	
-	private void setUpButtons() {
-				
-	}
-	
 	private void actionsButtons() {
 		
 		//1 jugador
@@ -117,9 +115,116 @@ public class FroggerGUI extends JFrame{
 			
 			@Override
 			public void mouseClicked(java.awt.event.MouseEvent e) {
-				GameGUI gameGUI = new GameGUI();
+				ChampSelection champSelection = new ChampSelection(instance, 1);
+				GameSettings gs = new GameSettings();
+				gs.setMode(1);
+				container.setVisible(false);
 			}
 		});
 		//2 jugadores
+		buttons[1].addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				ChampSelection champSelection = new ChampSelection(instance, 2);
+				GameSettings gs = new GameSettings();
+				gs.setMode(2);
+				container.setVisible(false);
+			}
+		});
+		//pvIA
+		buttons[2].addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				ChampSelection champSelection = new ChampSelection(instance,3);
+				GameSettings gs = new GameSettings();
+				gs.setMode(3);
+				container.setVisible(false);
+			}
+		});
+		//IavIA
+		buttons[3].addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				ChampSelection champSelection = new ChampSelection(instance,4);
+				GameSettings gs = new GameSettings();
+				gs.setMode(4);
+				container.setVisible(false);
+			}
+		});
 	}
 }
