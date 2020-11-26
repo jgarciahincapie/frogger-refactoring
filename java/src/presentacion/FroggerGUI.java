@@ -3,27 +3,16 @@ package presentacion;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.sun.glass.events.MouseEvent;
-import com.sun.xml.internal.ws.api.server.Container;
-import com.sun.xml.internal.ws.wsdl.ActionBasedOperationSignature;
 
 import aplicacion.GameSettings;
-import javafx.scene.layout.Border;
 
 public class FroggerGUI extends JFrame{
 	

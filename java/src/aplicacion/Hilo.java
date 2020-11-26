@@ -1,7 +1,4 @@
 package aplicacion;
-
-import com.sun.glass.ui.Timer;
-
 import presentacion.GameGUI;
 
 /**
@@ -11,7 +8,6 @@ public class Hilo extends Thread{
 
     FroggerManager froggerManager;
     GameGUI gameGUI;
-    Timer timer;
 
     private boolean playing;
 

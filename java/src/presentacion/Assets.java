@@ -5,8 +5,6 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
-import com.sun.istack.internal.FinalArrayList;
-
 public class Assets {
 
 	//Menu principal

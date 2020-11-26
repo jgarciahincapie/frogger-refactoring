@@ -1,9 +1,5 @@
 package aplicacion;
 import java.awt.geom.Rectangle2D;
-
-import java.util.Timer;
-
-
 import presentacion.GameGUI;
 
 public class FroggerManager {
@@ -29,7 +25,6 @@ public class FroggerManager {
 	//Sistema Update
 	private Hilo thread;
 	private GameGUI gameGUI;
-	private Timer timer;
 
 	public FroggerManager(int mode,GameGUI gameGUI){
 		this.gameGUI = gameGUI;
@@ -79,7 +74,6 @@ public class FroggerManager {
 		//Update
 		thread = new Hilo(this, gameGUI);
 		thread.start();
-		timer = new Timer();
 		lives = 5;
 		score = 0;
 		Reset(gameGUI);
