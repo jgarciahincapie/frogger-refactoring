@@ -3,6 +3,8 @@ package presentacion;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -58,21 +60,25 @@ public class ChampSelection extends JPanel{
 		}
 		instance.add(this);
 	}
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		if(mode == 1) {
+			g.drawImage(spritesPlayer[selectP1], 350, 250, 100, 100, null);
+		}
+		else if(mode == 2) {
+			g.drawImage(spritesPlayer[selectP1], 200, 250, 100, 100, null);
+			g.drawImage(spritesPlayer[selectP2], 450, 250, 100, 100, null);
+		}
+	}
 
 	public void mode1() {
 		
 		JLabel playButton = new JLabel(new ImageIcon(Assets.playButton));
-		JPanel playerImg = new JPanel(new GridLayout(2,1));
 		JLabel changePlayer = new JLabel(new ImageIcon(Assets.changeIcon));
-		
-		playerImg.setBackground(Color.black);
-		
-		//Paneles
-		playerImg.add(activeSpriteP1);
-		playerImg.add(changePlayer);
 		add(playButton);
-		add(playerImg);
-		
+		add(changePlayer);
 		//Acciones
 		playButton.addMouseListener(new MouseListener() {
 			
@@ -102,9 +108,8 @@ public class ChampSelection extends JPanel{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GameGUI gameGUI = new GameGUI(1);
+				GameGUI gameGUI = new GameGUI(1, spritesPlayer[selectP1], null);
 				gameGUI.windowSettings(instance);
-				playerImg.setVisible(false);
 				setVisible(false);
 			}
 		});
@@ -141,32 +146,29 @@ public class ChampSelection extends JPanel{
 				else
 					selectP1 = 0;
 				
-				remove(playerImg);
-				instance.repaint();
-				activeSpriteP1 = new JLabel(new ImageIcon(spritesPlayer[selectP1]));
-				playerImg.add(activeSpriteP1);
-				add(playerImg);
+				repaint();
 			}
 		});
 	}
 	
 	public void mode2() {
 		JLabel playButton = new JLabel(new ImageIcon(Assets.playButton));
-		JPanel playerImg = new JPanel(new GridLayout(2,2));
 		JLabel changePlayer1 = new JLabel(new ImageIcon(Assets.changeIcon));
 		JLabel changePlayer2 = new JLabel(new ImageIcon(Assets.changeIcon));
-		playerImg.setBackground(Color.black);
-		
-		//Paneles
-		playerImg.add(activeSpriteP1);
-		playerImg.add(activeSpriteP2);
-		playerImg.add(changePlayer1);
-		playerImg.add(changePlayer2);
-		add(playButton);
-		add(playerImg);
+		JPanel titleJPanel = new JPanel(new BorderLayout());
+		titleJPanel.setOpaque(false);
+		JPanel buttosJPanel = new JPanel(new GridLayout(1,2));
+		buttosJPanel.setOpaque(false);
+		setBackground(Color.black);
+		setLayout(new GridLayout(2,1));
+		titleJPanel.add(playButton);
+		buttosJPanel.add(changePlayer1);
+		buttosJPanel.add(changePlayer2);
+		add(titleJPanel);
+		add(buttosJPanel);
 		
 		//Acciones
-				playButton.addMouseListener(new MouseListener() {
+		playButton.addMouseListener(new MouseListener() {
 					
 					@Override
 					public void mouseReleased(MouseEvent e) {
@@ -194,13 +196,86 @@ public class ChampSelection extends JPanel{
 					
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						GameGUI gameGUI = new GameGUI(2);
+						GameGUI gameGUI = new GameGUI(2, spritesPlayer[selectP1], spritesPlayer[selectP2]);
 						gameGUI.windowSettings(instance);
-						playerImg.setVisible(false);
 						setVisible(false);
 					}
 				});
-		
+
+		changePlayer1.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(selectP1<=1) 					
+					selectP1+=1;
+				else
+					selectP1 = 0;
+				
+				repaint();
+				
+			}
+		});
+		changePlayer2.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(selectP2<=1) 					
+					selectP2+=1;
+				else
+					selectP2 = 0;
+				
+				repaint();
+				
+			}
+		});
 	}
 	
 	public void mode3() {

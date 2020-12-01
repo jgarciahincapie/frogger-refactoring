@@ -24,7 +24,7 @@ public class River extends Collisionable{
 	}
 	
 	public Rectangle2D getCollider() {
-		return new Rectangle2D.Double(x, y, width, height);		
+		return new Rectangle2D.Double(x, y, width, height-30);		
 	}
 
 	public BufferedImage getSprite() {

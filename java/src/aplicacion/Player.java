@@ -3,11 +3,14 @@ package aplicacion;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
+import com.sun.corba.se.pept.transport.ContactInfo;
+
+import javafx.scene.shape.TriangleMesh;
 import presentacion.Assets;
 
 public class Player {
 	
-	private BufferedImage sprite;	
+	private BufferedImage sprite, original;	
 	private int x, posInicialX;
 	private int y, posInicialY;
 	private int width;
@@ -19,8 +22,10 @@ public class Player {
 	private boolean isRiding;
 	private int player;
 	private int score;
+	private int lives;
+	private int timeInGrass;
 
-	public Player(int x, int y, int player) {
+	public Player(int x, int y, int player, BufferedImage sprite) {
 		posInicialX = x;
 		posInicialY = y;
 		this.x = x;
@@ -29,12 +34,14 @@ public class Player {
 		speedY = 50;
 		width = 50;
 		height = 50;
+		lives = 7;
 		score = 0;
+		this.original = sprite;
 		this.player = player;
 		isTrigger = false;
 		isAlive = true;
 		isRiding = false;
-		sprite = Assets.playerNormal;
+		resetPosition();
 	}
 	
 	public void Move() {
@@ -85,37 +92,56 @@ public class Player {
 	}
 	
 	public void OnCollisionEnter(Collisionable collision) {
-		if(collision.getTag() != "river" && (collision.getTag() == "trunk" || collision.getTag() == "turtle")) {
+		
+		if(collision.getTag() == "trunk" || collision.getTag() == "turtle") {
 			setX((int)collision.getCollider().getCenterX() - getWidth()/2);
 		}
 		
 		else if(collision.getTag() == "car") {
 			Dead();
 		}
-		
+				
 		else if(collision.getTag() == "finalStop") {
 			((StopPlace)collision).setSprite(Assets.froggy);
 			if(!((StopPlace)collision).isTrigger())
 				makePoint();
 			((StopPlace)collision).setTrigger(true);
 		}
+		else if (collision.getTag() == "grass" && !isTrigger) {
+			timeInGrass ++;
+			if(timeInGrass >=1000) {
+				Dead();
+				timeInGrass = 0;
+			}
+		}
+		//Power ups
+		else if (collision.getTag() == "speedMax") {
+			if(!((PowerUp)collision).isTrigger()) {
+				setSpeedY(100);				
+				((PowerUp)collision).ActivatePower();
+			}
+		}
 	}
 	
 	public void resetPosition() {
 		x = posInicialX;
 		y = posInicialY;
-		sprite = Assets.playerNormal;
+		timeInGrass = 0;
+		speedY = 50;
+		isRiding = false;
+		this.sprite = original;
 	}
 
 	private void makePoint() {
 		this.score +=50;
+		FroggerManager.getInstance().CheckWin();
 		resetPosition();
-		
 	}
 	
 	public void Dead() {
 		isTrigger = true;
 		sprite = Assets.playerDead;
+		lives--;
 		try {
 			Hilo.getInstance().join(1000);
 			resetPosition();
@@ -222,5 +248,14 @@ public class Player {
 	public void setScore(int score) {
 		this.score = score;
 	}
+
+	public int getLives() {
+		return lives;
+	}
+
+	public void setLives(int lives) {
+		this.lives = lives;
+	}
+	
 
 }

@@ -40,6 +40,9 @@ public class Assets {
 	//Animals
 	public static BufferedImage turtleIdle;
 	
+	//PowerUps
+	public static BufferedImage thunder;
+	
 	public static void Start(){
 		try {
 			//UI
@@ -74,6 +77,9 @@ public class Assets {
 			playerToxic = ImageIO.read(new File("Assets/Players/frogToxic.png"));
 			playerErotic = ImageIO.read(new File("Assets/Players/frogUnique.png"));
 			playerDead = ImageIO.read(new File("Assets/Players/frogX.png"));
+			
+			//PowerUPs
+			thunder = ImageIO.read(new File("Assets/PowerUps/trueno.png"));
 			
 		} catch (Exception e) {
 			e.printStackTrace();

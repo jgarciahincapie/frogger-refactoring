@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 import presentacion.Assets;
 
-public class Trunk extends Collisionable implements Platform{
+public class Trunk extends Collisionable{
 	
 	private boolean left;
 	private int x;
