@@ -5,7 +5,8 @@ import presentacion.GameGUI;
  * Unico Thread en el que se ejecuta el juego activo
  */
 public class Hilo extends Thread{
-
+	
+	public static Hilo instance;
     FroggerManager froggerManager;
     GameGUI gameGUI;
 
@@ -17,6 +18,7 @@ public class Hilo extends Thread{
      * @param canvas
      */
     public Hilo(FroggerManager playingScript, GameGUI canvas){
+    	if(instance == null) instance = this;
         this.gameGUI = canvas;
         this.froggerManager = playingScript;
     }
@@ -51,4 +53,12 @@ public class Hilo extends Thread{
     public void setPlaying(boolean data){
         this.playing = data;
     }
+
+	public static Hilo getInstance() {
+		return instance;
+	}
+
+	public static void setInstance(Hilo instance) {
+		Hilo.instance = instance;
+	}
 }

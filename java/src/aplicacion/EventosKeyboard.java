@@ -34,6 +34,7 @@ public class EventosKeyboard extends KeyAdapter{
     	super.keyTyped(e);
     	int id = e.getKeyCode();
     	
+    	//Player 1
     	if(id == KeyEvent.VK_W){
             up = true;
         }
@@ -45,6 +46,23 @@ public class EventosKeyboard extends KeyAdapter{
         }
         if(id == KeyEvent.VK_D){
             rigth = true;
+        }
+        
+        //Player 2
+        if(id == KeyEvent.VK_UP){
+            upArrow = true;
+        }
+        if(id == KeyEvent.VK_DOWN){
+            downArrow = true;
+        }
+        if(id == KeyEvent.VK_LEFT){
+            leftArrow  = true;
+        }
+        if(id == KeyEvent.VK_RIGHT){
+            rigthArrow = true;
+        }
+        if(id == KeyEvent.VK_RIGHT){
+            esc = false;
         }
     	
         //Pause Menu

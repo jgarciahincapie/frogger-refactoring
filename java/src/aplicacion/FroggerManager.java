@@ -1,5 +1,7 @@
 package aplicacion;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+
 import presentacion.GameGUI;
 
 public class FroggerManager {
@@ -7,11 +9,7 @@ public class FroggerManager {
 	//Game
 	private Player playerOne;
 	private Player playerTwo;
-	private	Trunk[] trunks;
-	private	Car[] cars;
-	private	StopPlace[] stopPlaces;
-	private	Turtle[] turtles;
-	private River river;
+	public static Collisionable[] collisionables;
 
 	//Configuracion juego
 	private int mode;
@@ -28,33 +26,55 @@ public class FroggerManager {
 
 	public FroggerManager(int mode,GameGUI gameGUI){
 		this.gameGUI = gameGUI;
-		System.out.print(GameSettings.mode);
+		if(mode == 1)
+			GameMode1();
+		else if(mode == 2)
+			GameMode2();
 		Start();
+	}
+	
+	private void GameMode1() {
+		playerOne = new Player(380, 480, 1);
+		playerTwo = null;
+	}
+	
+	private void GameMode2() {
+		playerOne = new Player(260, 480, 1);
+		playerTwo = new Player(520, 480, 2);
+		
 	}
 
 	//Instancia una unica vez
 	private void Start() {
-		//Instanciar todos los objetoss
-		stopPlaces = new StopPlace[] {new StopPlace(30, 30), new StopPlace(200, 30), new StopPlace(370, 30), new StopPlace(540, 30), new StopPlace(710, 30)};
-		trunks = new Trunk[] {
+		//Instanciar todos los objetos
+		collisionables = new Collisionable[] {
+				//River
+				new River(),
+				//Stop places
+				new StopPlace(30, 30), new StopPlace(200, 30), new StopPlace(370, 30), new StopPlace(540, 30), new StopPlace(710, 30),
+				//Trunks
 				//Largos inferiores
-				new Trunk(false, 0, 130, 170, 2), 
-				new Trunk(false, -300, 130, 170, 2), 
-				new Trunk(false, -600, 130, 170,  2),
+				new Trunk(false, 0, 130, 170, 50, 2), 
+				new Trunk(false, -300, 130, 170, 50, 2), 
+				new Trunk(false, -600, 130, 170, 50, 2),
 				//Largos superiores
-				new Trunk(true, 900, 80, 180, 1), 
-				new Trunk(true, 300, 80, 180, 1), 
-				new Trunk(true, 600, 80, 180,  1),
+				new Trunk(true, 900, 80, 180, 50, 1), 
+				new Trunk(true, 300, 80, 180, 50, 1), 
+				new Trunk(true, 600, 80, 180, 50, 1),
 				//Medianos
-				new Trunk(false, -100, 230, 100, 1), 
-				new Trunk(false, -300, 230, 100, 1), 
-				new Trunk(false, -500, 230, 100, 1), 
+				new Trunk(false, -100, 230, 100, 50, 1), 
+				new Trunk(false, -300, 230, 100, 50, 1), 
+				new Trunk(false, -500, 230, 100, 50, 1), 
 				//Pequeños
-				new Trunk(false, -650, 230, 50,  1), 
-				new Trunk(false, -800, 230, 50,  1)
-		};
-		cars = new Car[] {new Car(true, 800, 430, 1), new Car(false, 0, 380, 1), new Car(true, 800, 330, 1)};
-		turtles = new Turtle[] {
+				new Trunk(false, -650, 230, 50, 50, 1), 
+				new Trunk(false, -800, 230, 50, 50, 1),
+				
+				//Cars
+				new Car(true, 800, 430, 1), 
+				new Car(false, 0, 380, 1), 
+				new Car(true, 800, 330, 1),
+				
+				//Turtles
 				//Grupo 1
 				new Turtle(true, 0, 180, 2),
 				new Turtle(true, 50, 180, 2), 
@@ -68,9 +88,8 @@ public class FroggerManager {
 				new Turtle(true, 650, 180, 2), 
 				//Grupo 4
 				new Turtle(true, 950, 180, 2), 
-				new Turtle(true, 1000, 180, 2),
+				new Turtle(true, 1000, 180, 2)
 		};
-
 		//Update
 		thread = new Hilo(this, gameGUI);
 		thread.start();
@@ -78,93 +97,44 @@ public class FroggerManager {
 		score = 0;
 		Reset(gameGUI);
 	}
+	
 
-	private void Reset(GameGUI gameGUI) {
-		//Objetos para dibujar
-		playerOne = new Player(380, 480);
-		river = new River();
-		swiming = false;
-		gameGUI.toDraw(playerOne, trunks, cars, stopPlaces, turtles, river);
-
-		//Variables
-		this.gameGUI = gameGUI;
-		time = 0;
-		running = true;
-		cont = 0;
-	}
+	
 
 	public void Update() {
 		if(running) {
 			//Acutalizar posiciones de los elementos en el juego
 			gameGUI.repaint();
-			//Detecta collisiones & time
-			DetectCollision();
+			
 			DecreseTime();
 
-			//Movimiento jugador
+			//Movimiento jugadores
 			playerOne.Move();
-
-			//Movimiento Troncos
-			for(Trunk trunk: trunks) {
-				trunk.autoMove();
-			}
-
-			//Cars
-			for(Car car: cars) {
-				car.autoMove();
-			}
+			if(playerTwo != null)
+				playerTwo.Move();
 
 			//Animals
-			for(Turtle tt: turtles) {
+			for(Collisionable tt: collisionables) {
 				tt.autoMove();
 			}
 		}
 	}
-
-	private void DetectCollision() {		
+	
+	private void Reset(GameGUI gameGUI) {
+		//Objetos para dibujar
+		playerOne.resetPosition();
+		if(playerTwo != null)
+			playerTwo.resetPosition();
 		
-		//Carros
-		for(Car car: cars) {
-			if(Collision(car.getCollider(), playerOne.getCollider())) {
-				playerOne.OnCollisionEnter(car);
-				try {
-					thread.join(1000);
-					LoseLive();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		swiming = false;
+		gameGUI.toDraw(playerOne, playerTwo, collisionables);
 
-		//Trunks
-		for(Trunk trunk: trunks) {
-			if(Collision(trunk.getCollider(), playerOne.getCollider())) {
-				playerOne.OnCollisionEnter(trunk);
-				playerOne.setRiding(true);
-			}
-		}
-
-		//FinalStops
-		for(StopPlace stopPlace: stopPlaces) {
-			if(Collision(stopPlace.getCollider(), playerOne.getCollider())) {
-				if(!stopPlace.isTrigger()) {
-					swiming = false;
-					stopPlace.Win();
-					Win();
-				}
-			}
-		}
-		
-		//Turtles
-		for(Turtle tt: turtles) {
-			if(Collision(tt.getCollider(), playerOne.getCollider())) {
-				if(!tt.isTrigger()) {
-					playerOne.OnCollisionEnter(tt);
-				}
-			}
-		}
-		
+		//Variables
+		this.gameGUI = gameGUI;
+		running = true;
+		cont = 0;
 	}
+
 
 	private boolean Collision(Rectangle2D col1, Rectangle2D col2) {
 		if(col1.intersects(col2)) {
@@ -183,14 +153,6 @@ public class FroggerManager {
 		}
 	}
 
-	private void Win() {
-		Reset(gameGUI);
-		if(score<5)
-			score ++;
-		else
-			System.out.println("Ganaste petardo");
-	}
-
 	private void FinalGame() {
 		System.out.println("El juego ha terminado, sos un mancaso");
 	}
@@ -204,7 +166,7 @@ public class FroggerManager {
 				time+=8;				
 			}
 			else {
-				LoseLive();				
+				LoseLive();		
 			}
 			cont = 0;
 		}

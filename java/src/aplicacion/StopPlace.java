@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 import presentacion.Assets;
 
-public class StopPlace {
+public class StopPlace extends Collisionable{
 	
 	private BufferedImage sprite;
 	private int x;
@@ -15,6 +15,7 @@ public class StopPlace {
 	private boolean isTrigger;
 
 	public StopPlace(int x, int y) {
+		super("finalStop", x, y, 50, 50);
 		sprite = Assets.stopPlace;
 		this.x = x;
 		this.y = y;

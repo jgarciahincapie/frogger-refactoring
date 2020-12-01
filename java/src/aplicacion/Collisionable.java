@@ -1,8 +1,9 @@
 package aplicacion;
 
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 
-public class Collisionable{
+public class Collisionable implements Platform{
 	
 	private String tag;
 	private boolean isTrigger;
@@ -70,6 +71,17 @@ public class Collisionable{
 	
 	public void setHeight(int height) {
 		this.height = height;
+	}
+
+	@Override
+	public void autoMove() {
+		
+	}
+
+	@Override
+	public BufferedImage getSprite() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

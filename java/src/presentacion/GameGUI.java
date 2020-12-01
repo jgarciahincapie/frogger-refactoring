@@ -11,48 +11,28 @@ public class GameGUI extends JPanel{
 	private FroggerManager manager;
 	
 	//To Draw
-	private Player player1;
-	private Trunk[] trunks;
-	private Car[] cars;
-	private StopPlace[] stopPlaces;
-	private Turtle[] turtles;
-	private River river;
+	private Player player1, player2;
+	private Collisionable[] collisionables;
 
-	public GameGUI() {
+	public GameGUI(int mode) {
 		Assets.Start();
-		manager = new FroggerManager(0, this);
+		manager = new FroggerManager(mode, this);
 		setVisible(true);
 	}
 	
 	@Override
 	public void paint(Graphics g) {
         super.paintComponent(g);
-		//River && Street
-		g.drawImage(river.getSprite(), river.getX(), river.getY(), river.getWidth(), river.getHeight(), null);
 		g.drawImage(Assets.street, 0, 330, 800, 150, null);
-		
-		//Trunks
-		for(Trunk trunk: trunks) {
-			g.drawImage(trunk.getSprite(), trunk.getX(), trunk.getY(), trunk.getWidth(), trunk.getHeight(), null);
+		//Sprites
+		for(Collisionable col: collisionables) {
+			g.drawImage(col.getSprite(), col.getX(), col.getY(), col.getWidth(), col.getHeight(), null);
 		}
 		
-		//Trunks
-		for(Car car: cars) {
-			g.drawImage(car.getSprite(), car.getX(), car.getY(), car.getWidth(), car.getHeight(), null);
-		}
-		
-		//StopPLaces
-		for(StopPlace sp: stopPlaces) {
-			g.drawImage(sp.getSprite(), sp.getX(), sp.getY(), sp.getWidth(), sp.getHeight(), null);
-		}
-		
-		for(Turtle tt: turtles) {
-			g.drawImage(tt.getSprite(), tt.getX(), tt.getY(), tt.getWidth(), tt.getHeight(), null);
-		}
 		//Score & Time
 		g.setColor(Color.white);
 		g.setFont(new Font("Serif", Font.BOLD, 30));
-		g.drawString("Score: " + manager.getScore(), 50, 565);
+		g.drawString("Score: " + player1.getScore(), 50, 565);
 		g.setColor(Color.yellow);
 		g.drawString("Time", 710, 565);
 		g.setColor(Color.red);
@@ -65,20 +45,19 @@ public class GameGUI extends JPanel{
 		g.drawImage(Assets.grass, 0, 280, 800, 50, null);
 		g.drawImage(Assets.finalGrass, 0, -5, 800, 80, null);
 	
-		//Player
+		//Players
 		g.drawImage(player1.getSprite(), player1.getX(), player1.getY(), player1.getWidth(), player1.getHeight(), null);
+		if(player2 != null)
+			g.drawImage(player2.getSprite(), player2.getX(), player2.getY(), player2.getWidth(), player2.getHeight(), null);
 		
 		Toolkit.getDefaultToolkit().sync();
 		
 	}
 	
-	public void toDraw(Player player1, Trunk[] trunks, Car[] cars, StopPlace[] stopPlaces, Turtle[] turtles, River river) {
-		this.player1 = player1; 
-		this.trunks = trunks;
-		this.cars = cars;
-		this.stopPlaces = stopPlaces;
-		this.turtles = turtles;
-		this.river = river;
+	public void toDraw(Player player1, Player player2, Collisionable[] collisionables) {
+		this.player1 = player1;
+		this.player2 = player2;
+		this.collisionables = collisionables;
 	} 
 	
 	public void windowSettings(JFrame jFrame) {

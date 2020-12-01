@@ -17,14 +17,14 @@ public class Trunk extends Collisionable implements Platform{
 	
 	private boolean isTrigger = false;
 
-	public Trunk(boolean left, int x, int y, int width, double speed) {
+	public Trunk(boolean left, int x, int y, int width, int height,double speed) {
 		super("trunk", x, y, width, 50);
 		this.sprite = Assets.trunk;
 		this.left = left;
 		this.x = x;
 		this.y = y;
 		this.width = width;
-		this.height = 50;
+		this.height = height;
 		this.currentSpeed = speed;
 	}
 

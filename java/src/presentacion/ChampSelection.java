@@ -102,7 +102,7 @@ public class ChampSelection extends JPanel{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GameGUI gameGUI = new GameGUI();
+				GameGUI gameGUI = new GameGUI(1);
 				gameGUI.windowSettings(instance);
 				playerImg.setVisible(false);
 				setVisible(false);
@@ -164,6 +164,43 @@ public class ChampSelection extends JPanel{
 		playerImg.add(changePlayer2);
 		add(playButton);
 		add(playerImg);
+		
+		//Acciones
+				playButton.addMouseListener(new MouseListener() {
+					
+					@Override
+					public void mouseReleased(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mousePressed(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mouseExited(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						GameGUI gameGUI = new GameGUI(2);
+						gameGUI.windowSettings(instance);
+						playerImg.setVisible(false);
+						setVisible(false);
+					}
+				});
+		
 	}
 	
 	public void mode3() {
