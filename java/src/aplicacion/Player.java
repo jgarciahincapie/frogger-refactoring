@@ -51,7 +51,7 @@ public class Player {
 				this.y -= speedY;
 				EventosKeyboard.up = false;
 			}
-			else if(EventosKeyboard.down && getY() < 500) {
+			else if(EventosKeyboard.down && getY() < 450) {
 				this.y += speedY;
 				EventosKeyboard.down = false;
 			}
@@ -70,7 +70,7 @@ public class Player {
 				this.y -= speedY;
 				EventosKeyboard.upArrow = false;
 			}
-			else if(EventosKeyboard.downArrow && getY() < 500) {
+			else if(EventosKeyboard.downArrow && getY() < 450) {
 				this.y += speedY;
 				EventosKeyboard.downArrow = false;
 			}

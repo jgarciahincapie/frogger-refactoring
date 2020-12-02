@@ -104,10 +104,7 @@ public class FroggerGUI extends JFrame{
 			
 			@Override
 			public void mouseClicked(java.awt.event.MouseEvent e) {
-				ChampSelection champSelection = new ChampSelection(instance, 1);
-				GameSettings gs = new GameSettings();
-				gs.setMode(1);
-				container.setVisible(false);
+				AbrirSeleccionChamps(1);
 			}
 		});
 		//2 jugadores
@@ -139,10 +136,7 @@ public class FroggerGUI extends JFrame{
 			
 			@Override
 			public void mouseClicked(java.awt.event.MouseEvent e) {
-				ChampSelection champSelection = new ChampSelection(instance, 2);
-				GameSettings gs = new GameSettings();
-				gs.setMode(2);
-				container.setVisible(false);
+				AbrirSeleccionChamps(2);
 			}
 		});
 		//pvIA
@@ -174,10 +168,7 @@ public class FroggerGUI extends JFrame{
 			
 			@Override
 			public void mouseClicked(java.awt.event.MouseEvent e) {
-				ChampSelection champSelection = new ChampSelection(instance,3);
-				GameSettings gs = new GameSettings();
-				gs.setMode(3);
-				container.setVisible(false);
+				AbrirSeleccionChamps(3);
 			}
 		});
 		//IavIA
@@ -209,11 +200,16 @@ public class FroggerGUI extends JFrame{
 			
 			@Override
 			public void mouseClicked(java.awt.event.MouseEvent e) {
-				ChampSelection champSelection = new ChampSelection(instance,4);
-				GameSettings gs = new GameSettings();
-				gs.setMode(4);
-				container.setVisible(false);
+				AbrirSeleccionChamps(4);
 			}
 		});
+	}
+	
+	public ChampSelection AbrirSeleccionChamps(int mode) {
+		ChampSelection champSelection = new ChampSelection(instance,mode);
+		GameSettings gs = new GameSettings();
+		gs.setMode(mode);
+		container.setVisible(false);
+		return champSelection;
 	}
 }

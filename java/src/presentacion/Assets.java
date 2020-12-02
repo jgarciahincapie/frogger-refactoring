@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 public class Assets {
 
@@ -82,8 +83,7 @@ public class Assets {
 			thunder = ImageIO.read(new File("Assets/PowerUps/trueno.png"));
 			
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.print("Ocurrio un error leyendo imagenes");
+			JOptionPane.showMessageDialog(null, "Ocurrio un error leyendo los recursos");
 			System.exit(0);
 		}
 	}

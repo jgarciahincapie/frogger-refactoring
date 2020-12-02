@@ -108,9 +108,7 @@ public class ChampSelection extends JPanel{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GameGUI gameGUI = new GameGUI(1, spritesPlayer[selectP1], null);
-				gameGUI.windowSettings(instance);
-				setVisible(false);
+				JugarModo1(1, selectP1);
 			}
 		});
 		changePlayer.addMouseListener(new MouseListener() {
@@ -196,9 +194,7 @@ public class ChampSelection extends JPanel{
 					
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						GameGUI gameGUI = new GameGUI(2, spritesPlayer[selectP1], spritesPlayer[selectP2]);
-						gameGUI.windowSettings(instance);
-						setVisible(false);
+						JugarModo2(2, selectP1, selectP2);
 					}
 				});
 
@@ -283,5 +279,20 @@ public class ChampSelection extends JPanel{
 	}
 	
 	public void mode4() {
+	}
+	
+	
+	public GameGUI JugarModo1(int mode, int selectP1) {
+		GameGUI gameGUI = new GameGUI(mode, spritesPlayer[selectP1], null);
+		gameGUI.windowSettings(instance);
+		setVisible(false);
+		return gameGUI;
+	}
+	
+	public GameGUI JugarModo2(int mode, int selectP1, int selectP2) {
+		GameGUI gameGUI = new GameGUI(mode, spritesPlayer[selectP1], spritesPlayer[selectP2]);
+		gameGUI.windowSettings(instance);
+		setVisible(false);
+		return gameGUI;
 	}
 }
