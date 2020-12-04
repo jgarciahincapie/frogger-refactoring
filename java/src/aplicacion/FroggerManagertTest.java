@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sun.org.apache.xml.internal.serializer.ElemDesc;
 
 import presentacion.Assets;
 import presentacion.ChampSelection;

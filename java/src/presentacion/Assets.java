@@ -43,6 +43,7 @@ public class Assets {
 	
 	//PowerUps
 	public static BufferedImage thunder;
+	public static BufferedImage caparason;
 	
 	public static void Start(){
 		try {
@@ -81,7 +82,7 @@ public class Assets {
 			
 			//PowerUPs
 			thunder = ImageIO.read(new File("Assets/PowerUps/trueno.png"));
-			
+			caparason = ImageIO.read(new File("Assets/PowerUps/caparason.png"));
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Ocurrio un error leyendo los recursos");
 			System.exit(0);

@@ -117,7 +117,8 @@ public class FroggerManager {
 				new Turtle(true, 1000, 180, 2 + ronda),
 				
 				//Power Ups
-				new Acelerador(new Random().nextInt(750), 430, 50, 50)
+				new Acelerador(new Random().nextInt(750), 430, 50, 50),
+				new Inmunidad(new Random().nextInt(750), 400, 50, 50)
 		};
 		
 		//Update

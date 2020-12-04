@@ -3,9 +3,7 @@ package aplicacion;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
-import com.sun.corba.se.pept.transport.ContactInfo;
 
-import javafx.scene.shape.TriangleMesh;
 import presentacion.Assets;
 
 public class Player {
@@ -97,8 +95,11 @@ public class Player {
 			setX((int)collision.getCollider().getCenterX() - getWidth()/2);
 		}
 		
-		else if(collision.getTag() == "car") {
-			Dead();
+		else if(collision.getTag() == "car" ) {
+			if(!isTrigger)
+				Dead();
+			else
+				isTrigger=true;
 		}
 		
 				
@@ -121,6 +122,10 @@ public class Player {
 				setSpeedY(100);				
 				((PowerUp)collision).ActivatePower();
 			}
+		}
+		else if (collision.getTag()=="inmune") {
+			isTrigger=true;
+			
 		}
 	}
 	
