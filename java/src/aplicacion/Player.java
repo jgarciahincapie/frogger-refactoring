@@ -100,6 +100,7 @@ public class Player {
 		else if(collision.getTag() == "car") {
 			Dead();
 		}
+		
 				
 		else if(collision.getTag() == "finalStop") {
 			((StopPlace)collision).setSprite(Assets.froggy);

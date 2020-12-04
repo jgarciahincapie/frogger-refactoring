@@ -2,6 +2,7 @@ package aplicacion;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.PrimitiveIterator.OfDouble;
 
 import presentacion.Assets;
 import presentacion.GameGUI;
@@ -29,11 +30,10 @@ public class FroggerManager {
 
 	//Sistema Update
 	private Hilo thread;
-	private GameGUI gameGUI;
 
-	public FroggerManager(int mode,GameGUI gameGUI, BufferedImage p1Sprite, BufferedImage p2Sprite){
+	public FroggerManager(int mode, BufferedImage p1Sprite, BufferedImage p2Sprite){
 		if(instance == null) instance = this;
-		this.gameGUI = gameGUI;
+
 		this.mode = mode;
 		this.p1Sprite = p1Sprite;
 		this.p2Sprite = p2Sprite;		
@@ -121,16 +121,13 @@ public class FroggerManager {
 		};
 		
 		//Update
-		thread = new Hilo(this, gameGUI);
-		thread.start();
-		Reset(gameGUI);
+		Reset();
 	}
 
 
 	public void Update() {
 		if(running) {
-			//Acutalizar posiciones de los elementos en el juego
-			gameGUI.repaint();
+
 			//Time
 			DecreseTime();
 
@@ -150,7 +147,7 @@ public class FroggerManager {
 		}
 	}
 	
-	private void Reset(GameGUI gameGUI) {
+	private void Reset() {
 		//ChecWin
 		cantPlaces = new ArrayList<StopPlace>();
 		contStopPlaces = 0;
@@ -159,73 +156,21 @@ public class FroggerManager {
 		playerOne.resetPosition();
 		if(playerTwo != null)
 			playerTwo.resetPosition();
-		
-		gameGUI.toDraw(playerOne, playerTwo, collisionables);
 
 		//Variables
-		this.gameGUI = gameGUI;
 		running = true;
 		cont = 0;
 	}
 	
 	private void nextRound() {
-		collisionables = new Collisionable[] {
-				//River
-				new River(),
-				//Grass
-				new Grass(0, 480, 800, 50),
-				new Grass(0, 280, 800, 50),
-				//Stop places
-				new StopPlace(30, 30), new StopPlace(200, 30), new StopPlace(370, 30), new StopPlace(540, 30), new StopPlace(710, 30),
-				//Trunks
-				//Largos inferiores
-				new Trunk(false, 0, 130, 170, 50, 2 + ronda), 
-				new Trunk(false, -300, 130, 170, 50, 2 + ronda), 
-				new Trunk(false, -600, 130, 170, 50, 2 + ronda),
-				//Largos superiores
-				new Trunk(true, 900, 80, 180, 50, 1 + ronda), 
-				new Trunk(true, 300, 80, 180, 50, 1 + ronda), 
-				new Trunk(true, 600, 80, 180, 50, 1 + ronda),
-				//Medianos
-				new Trunk(false, -100, 230, 100, 50, 1 + ronda), 
-				new Trunk(false, -300, 230, 100, 50, 1 + ronda), 
-				new Trunk(false, -500, 230, 100, 50, 1 + ronda), 
-				//Pequeños
-				new Trunk(false, -650, 230, 50, 50, 1 + ronda), 
-				new Trunk(false, -800, 230, 50, 50, 1 + ronda),
-				
-				//Cars
-				//Inferiores
-				new Car(false, 600, 430, 1 + ronda), 
-				new Car(false, -750, 430, 1 + ronda), 
-				new Car(false, 900, 430, 1 + ronda),
-				//Medios
-				new Car(false, -600, 380, 2 + ronda), 
-				new Car(false, -350, 380, 2 + ronda), 
-				new Car(false, 0, 380, 2 + ronda),
-				//Superiores
-				new Car(false, 600, 330, 3 + ronda), 
-				new Car(false, -600, 330, 3 + ronda), 
-				new Car(false, 900, 330, 3 + ronda),
-				
-				//Turtles
-				//Grupo 1
-				new Turtle(true, 0, 180, 2 + ronda),
-				new Turtle(true, 50, 180, 2 + ronda), 
-				new Turtle(true, 100, 180, 2 + ronda),
-				//Grupo 2
-				new Turtle(true, 300, 180, 2 + ronda), 
-				new Turtle(true, 350, 180, 2 + ronda),
-				//Grupo 3
-				new Turtle(true, 550, 180, 2 + ronda), 
-				new Turtle(true, 600, 180, 2 + ronda), 
-				new Turtle(true, 650, 180, 2 + ronda), 
-				//Grupo 4
-				new Turtle(true, 950, 180, 2 + ronda), 
-				new Turtle(true, 1000, 180, 2 + ronda)
-		};
 		
-		Reset(gameGUI);
+		for(Collisionable i: collisionables) {
+			if(i instanceof Car) ((Car)i).setCurrentSpeed(((Car) i).getCurrentSpeed() + ronda);
+			if(i instanceof Turtle) ((Turtle)i).setCurrentSpeed(((Turtle) i).getCurrentSpeed() + ronda);
+			if(i instanceof Trunk) ((Trunk)i).setCurrentSpeed(((Trunk) i).getCurrentSpeed() + ronda);
+		}
+		
+		Reset();
 	}
 
 	private void DecreseTime() {
@@ -299,5 +244,31 @@ public class FroggerManager {
 	public static FroggerManager getInstance() {
 		return instance;
 	}
+
+	public Player getPlayerOne() {
+		return playerOne;
+	}
+
+	public void setPlayerOne(Player playerOne) {
+		this.playerOne = playerOne;
+	}
+
+	public Player getPlayerTwo() {
+		return playerTwo;
+	}
+
+	public void setPlayerTwo(Player playerTwo) {
+		this.playerTwo = playerTwo;
+	}
+
+	public static Collisionable[] getCollisionables() {
+		return collisionables;
+	}
+
+	public static void setCollisionables(Collisionable[] collisionables) {
+		FroggerManager.collisionables = collisionables;
+	}
+	
+	
 	
 }

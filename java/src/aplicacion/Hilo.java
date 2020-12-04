@@ -33,8 +33,8 @@ public class Hilo extends Thread{
     		   sleep(10);		
 		} catch (Exception e) {
 		}
-    	   froggerManager.Update();
     	   gameGUI.repaint();
+    	   froggerManager.Update();
        }
     }
 

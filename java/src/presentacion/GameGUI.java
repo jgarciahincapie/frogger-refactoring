@@ -15,10 +15,16 @@ public class GameGUI extends JPanel{
 	//To Draw
 	private Player player1, player2;
 	private Collisionable[] collisionables;
+	
+	//Thread
+	private Hilo hilo;
 
 	public GameGUI(int mode, BufferedImage p1Sprite, BufferedImage p2Sprite) {
 		Assets.Start();
-		manager = new FroggerManager(mode, this, p1Sprite, p2Sprite);
+		manager = new FroggerManager(mode, p1Sprite, p2Sprite);
+		toDraw();
+		hilo = new Hilo(manager, this);
+		hilo.start();
 		setVisible(true);
 	}
 	
@@ -61,10 +67,10 @@ public class GameGUI extends JPanel{
 		
 	}
 	
-	public void toDraw(Player player1, Player player2, Collisionable[] collisionables) {
-		this.player1 = player1;
-		this.player2 = player2;
-		this.collisionables = collisionables;
+	public void toDraw() {
+		player1 = manager.getPlayerOne();
+		player2 = manager.getPlayerTwo();
+		collisionables = manager.getCollisionables();
 	} 
 	
 	public void windowSettings(JFrame jFrame) {
@@ -81,7 +87,6 @@ public class GameGUI extends JPanel{
 		jFrame.dispose();
         jFrame.setVisible(true);
 	}
-	
 	
 	
 	

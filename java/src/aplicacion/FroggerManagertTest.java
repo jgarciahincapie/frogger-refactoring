@@ -85,6 +85,7 @@ public class FroggerManagertTest {
 	public void elJugadorDeberiaMoverseHaciaElSur() {
 		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic);
 		Player player = gameGui.getPlayer1();
+		player.setY(400);
 		int lastY = player.getY();
 		EventosKeyboard.down = true;
 		player.Move();
