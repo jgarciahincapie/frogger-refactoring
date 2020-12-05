@@ -22,7 +22,7 @@ public class Collisionable implements Platform{
 	}
 	
 	public Rectangle2D getCollider() {
-		return new Rectangle2D.Double(x, y, width, height);
+		return new Rectangle2D.Double(x, y+5, width, height-10);
 	}
 
 	public String getTag() {

@@ -1,66 +1,70 @@
 package aplicacion;
 
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import presentacion.Assets;
 
-public class PlayerNormal extends Player{
-	
-	public PlayerNormal(int x, int y, int player, BufferedImage sprite) {
+public class MachineCaution extends Player implements Machine{	
+
+	private double timeToChoise = 0.02f;
+	private double currentTime;
+	private String dirF = "";
+
+	public MachineCaution(int x, int y, int player, BufferedImage sprite) {
 		super(x, y, player, sprite);
 	}
 
 	@Override
+	public String ChooseMove() {
+		String[] optString = new String[] {"N", "N", "S", "N", "L", "N", "R", "N", "N"};
+		return optString[new Random().nextInt(optString.length)];
+	}
+
+	@Override
 	public void Move() {
-		if(player == 1) {			
-			if(EventosKeyboard.up && getY() > 50){
-				this.score +=10;
-				this.y -= speedY;
-				EventosKeyboard.up = false;
-			}
-			else if(EventosKeyboard.down && getY() < 450) {
-				this.y += speedY;
-				EventosKeyboard.down = false;
-			}
-			else if(EventosKeyboard.left && getX() > 25) {
-				this.x -= speedX;
-				EventosKeyboard.left = false;
-			}
-			else if(EventosKeyboard.rigth && getX() < 730) {
-				this.x += speedX;
-				EventosKeyboard.rigth = false;
-			}
+		dirF = "";
+		if(currentTime >= timeToChoise) {
+			dirF = ChooseMove();
+			Timer timer = new Timer();
+			TimerTask task = new TimerTask() {
+				@Override
+				public void run() {
+					currentTime = 0;
+					dirF = "";
+				}
+			};
+
+			timer.schedule(task, 5);
 		}
-		else if(player == 2) {
-			if(EventosKeyboard.upArrow && getY() > 50){
-				this.score +=10;
-				this.y -= speedY;
-				EventosKeyboard.upArrow = false;
-			}
-			else if(EventosKeyboard.downArrow && getY() < 450) {
-				this.y += speedY;
-				EventosKeyboard.downArrow = false;
-			}
-			else if(EventosKeyboard.leftArrow && getX() > 25) {
-				this.x -= speedX;
-				EventosKeyboard.leftArrow = false;
-			}
-			else if(EventosKeyboard.rigthArrow && getX() < 730) {
-				this.x += speedX;
-				EventosKeyboard.rigthArrow = false;
-			}
+		else {			
+			currentTime += 0.001;
 		}
-		
+
+		String dir = dirF;
+		if(dir == "N" && getY() > 50){
+			super.score +=10;
+			super.y -= speedY;
+		}
+		else if(dir == "S" && getY() < 450) {
+			super.y += speedY;
+		}
+		else if(dir == "L" && getX() > 25) {
+			super.x -= speedX;
+		}
+		else if(dir == "R" && getX() < 730) {
+			super.x += speedX;
+		}
+
 		for(Collisionable i: FroggerManager.collisionables) {
-			if(Collision(i.getCollider())) {				
-				OnCollisionEnter(i);
+			if(Collision(i.getCollider())) {			
+				this.OnCollisionEnter(i);
 			}
 		}
 	}
-	
+
 	@Override
 	public void OnCollisionEnter(Collisionable collision) {
 		if(collision.getTag() == "trunk") {
@@ -77,7 +81,7 @@ public class PlayerNormal extends Player{
 				isRiding = false;
 			}
 		}
-
+		
 		else if(collision.getTag() == "car" && ((Car)collision).isTrigger() == false) {
 			if(isTrigger == false) {
 				Dead();
@@ -123,6 +127,7 @@ public class PlayerNormal extends Player{
 			isToxic = true;
 		}
 	}
+	
 	@Override
 	public void makePoint() {
 		super.score +=50;
@@ -138,5 +143,4 @@ public class PlayerNormal extends Player{
 		resetPosition();
 		isTrigger = false;
 	}
-
 }

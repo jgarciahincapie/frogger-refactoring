@@ -7,9 +7,9 @@ import java.util.TimerTask;
 
 import presentacion.Assets;
 
-public class MachineIrreflexive extends Player{	
+public class MachineIrreflexive extends Player implements Machine{	
 
-	private double timeToChoise = 0.05f;
+	private double timeToChoise = 0.02f;
 	private double currentTime;
 	private String dirF = "";
 
@@ -17,7 +17,8 @@ public class MachineIrreflexive extends Player{
 		super(x, y, player, sprite);
 	}
 
-	private String ChooseMove() {
+	@Override
+	public String ChooseMove() {
 		String[] optString = new String[] {"N", "N", "S", "N", "L", "N", "R", "N", "N"};
 		return optString[new Random().nextInt(optString.length)];
 	}
@@ -138,13 +139,8 @@ public class MachineIrreflexive extends Player{
 	public void Dead() {
 		sprite = Assets.playerDead;
 		lives--;
-		score -= 100;
-		try {
-			Hilo.getInstance().join(1000);
-			resetPosition();
-			isTrigger = false;
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		score -= score>0?100:0;
+		resetPosition();
+		isTrigger = false;
 	}
 }

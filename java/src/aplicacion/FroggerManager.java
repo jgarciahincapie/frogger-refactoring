@@ -67,7 +67,7 @@ public class FroggerManager {
 	
 	private void GameMode4() {
 		playerOne = new MachineIrreflexive(260, 480, 1, p1Sprite);
-		playerTwo = new MachineIrreflexive(520, 480, 2, p2Sprite);
+		playerTwo = new MachineBrave(520, 480, 2, p2Sprite);
 	}
 
 	//Instancia una unica vez
@@ -84,13 +84,13 @@ public class FroggerManager {
 				new StopPlace(30, 30), new StopPlace(200, 30), new StopPlace(370, 30), new StopPlace(540, 30), new StopPlace(710, 30),
 				//Trunks
 				//Largos inferiores
-				new Trunk(false, 0, 130, 170, 50, 2 + ronda), 
-				new Trunk(false, -300, 130, 170, 50, 2 + ronda), 
-				new Trunk(false, -600, 130, 170, 50, 2 + ronda),
+				new Trunk(false, 0, 155, 170, 50, 2 + ronda), 
+				new Trunk(false, -300, 155, 170, 50, 2 + ronda), 
+				new Trunk(false, -600, 155, 170, 50, 2 + ronda),
 				//Largos superiores
-				new Trunk(true, 900, 70, 180, 50, 1 + ronda), 
-				new Trunk(true, 300, 70, 180, 50, 1 + ronda), 
-				new Trunk(true, 600, 70, 180, 50, 1 + ronda),
+				new Trunk(true, 900, 115, 170, 50, 1 + ronda), 
+				new Trunk(true, 300, 115, 170, 50, 1 + ronda), 
+				new Trunk(true, 600, 115, 170, 50, 1 + ronda),
 				//Medianos
 				new Trunk(false, -100, 235, 100, 50, 1 + ronda), 
 				new Trunk(false, -300, 235, 100, 50, 1 + ronda), 
@@ -114,21 +114,36 @@ public class FroggerManager {
 				new Car(false, 900, 330, 3 + ronda),
 
 
-				//Turtles
-				//Grupo 1
-				new Turtle(true, 0, 180, 2 + ronda),
-				new Turtle(true, 50, 180, 2 + ronda), 
-				new Turtle(true, 100, 180, 2 + ronda),
-				//Grupo 2
-				new Turtle(true, 300, 180, 2 + ronda), 
-				new Turtle(true, 350, 180, 2 + ronda),
-				//Grupo 3
-				new Turtle(true, 550, 180, 2 + ronda), 
-				new Turtle(true, 600, 180, 2 + ronda), 
-				new Turtle(true, 650, 180, 2 + ronda), 
+				//Turtles sup
+				//Grupo 1 
+				new Turtle(false, 0, 75, 2 + ronda),
+				new Turtle(false, 50, 75, 2 + ronda), 
+				new Turtle(false, 100, 75, 2 + ronda),
+				//Grupo 2 
+				new Turtle(false, 300, 75, 2 + ronda), 
+				new Turtle(false, 350, 75, 2 + ronda),
+				//Grupo 3 
+				new Turtle(false, 550, 75, 2 + ronda), 
+				new Turtle(false, 600, 75, 2 + ronda), 
+				new Turtle(false, 650, 75, 2 + ronda), 
 				//Grupo 4
-				new Turtle(true, 950, 180, 2 + ronda), 
-				new Turtle(true, 1000, 180, 2 + ronda),
+				new Turtle(false, 950, 75, 2 + ronda), 
+				new Turtle(false, 1000, 75, 2 + ronda),
+				//Turtles inf
+				//Grupo 1
+				new Turtle(true, 0, 195, 2 + ronda),
+				new Turtle(true, 50, 195, 2 + ronda), 
+				new Turtle(true, 100, 195, 2 + ronda),
+				//Grupo 2
+				new Turtle(true, 300, 195, 2 + ronda), 
+				new Turtle(true, 350, 195, 2 + ronda),
+				//Grupo 3
+				new Turtle(true, 550, 195, 2 + ronda), 
+				new Turtle(true, 600, 195, 2 + ronda), 
+				new Turtle(true, 650, 195, 2 + ronda), 
+				//Grupo 4
+				new Turtle(true, 950, 195, 2 + ronda), 
+				new Turtle(true, 1000, 195, 2 + ronda),
 
 				//Power Ups
 				new Acelerador(new Random().nextInt(750), 430, 50, 50),

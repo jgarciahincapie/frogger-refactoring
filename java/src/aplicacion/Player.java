@@ -60,7 +60,7 @@ public abstract class Player {
 	}
 
 	public Rectangle2D getCollider() {
-		return new Rectangle2D.Double(x+5, y+5, width-10, height-10);
+		return new Rectangle2D.Double(x, y+10, width, height-20);
 	}
 
 
