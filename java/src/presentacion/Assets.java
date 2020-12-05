@@ -40,6 +40,8 @@ public class Assets {
 	
 	//Animals
 	public static BufferedImage turtleIdle;
+	public static BufferedImage turtleInit;
+	public static BufferedImage turtleMid;
 	
 	//PowerUps
 	public static BufferedImage thunder;
@@ -73,6 +75,8 @@ public class Assets {
 			
 			//Animals
 			turtleIdle = ImageIO.read(new File("Assets/Animals/trutleErotic.png"));
+			turtleMid= ImageIO.read(new File("Assets/Animals/turtleMid.png"));
+			turtleInit = ImageIO.read(new File("Assets/Animals/turtleInit.png"));
 			
 			//Player
 			playerNormal = ImageIO.read(new File("Assets/Players/frog0.png"));

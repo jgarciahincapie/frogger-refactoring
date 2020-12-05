@@ -11,14 +11,18 @@ public class Inmunidad extends Collisionable implements PowerUp {
 	public Inmunidad(int x, int y, int width, int height) {
 		super("inmune",x, y, width, height);
 		sprite = Assets.caparason;
-		
 	}
 
 	@Override
 	public void ActivatePower() {
-		sprite = null;
 		super.setTrigger(true);
+		sprite = null;
 		
+	}
+	
+	@Override
+	public BufferedImage getSprite() {
+		return sprite;
 	}
 
 }

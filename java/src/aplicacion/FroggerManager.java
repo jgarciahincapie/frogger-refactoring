@@ -8,7 +8,7 @@ import presentacion.Assets;
 import presentacion.GameGUI;
 
 public class FroggerManager {
-	
+
 	//Instancias
 	public static FroggerManager instance;
 
@@ -38,27 +38,41 @@ public class FroggerManager {
 		this.p1Sprite = p1Sprite;
 		this.p2Sprite = p2Sprite;		
 		ronda = 0;
-		
+		System.out.println(mode);
 		if(mode == 1)
 			GameMode1();
 		else if(mode == 2)
 			GameMode2();
+		else if(mode == 3)
+			GameMode3();
+		else if(mode == 4)
+			GameMode4();
 		Start();
 	}
-	
+
 	private void GameMode1() {
-		playerOne = new Player(380, 480, 1, p1Sprite);
+		playerOne = new PlayerNormal(380, 480, 1, p1Sprite);
 		playerTwo = null;
 	}
-	
+
 	private void GameMode2() {
-		playerOne = new Player(260, 480, 1, p1Sprite);
-		playerTwo = new Player(520, 480, 2, p2Sprite);	
+		playerOne = new PlayerNormal(260, 480, 1, p1Sprite);
+		playerTwo = new PlayerNormal(520, 480, 2, p2Sprite);	
+	}
+	
+	private void GameMode3() {
+		playerOne = new PlayerNormal(260, 480, 1, p1Sprite);
+		playerTwo = new MachineIrreflexive(520, 480, 2, p2Sprite);
+	}
+	
+	private void GameMode4() {
+		playerOne = new MachineIrreflexive(260, 480, 1, p1Sprite);
+		playerTwo = new MachineIrreflexive(520, 480, 2, p2Sprite);
 	}
 
 	//Instancia una unica vez
 	private void Start() {
-		
+
 		//Instanciar todos los objetos
 		collisionables = new Collisionable[] {
 				//River
@@ -74,17 +88,17 @@ public class FroggerManager {
 				new Trunk(false, -300, 130, 170, 50, 2 + ronda), 
 				new Trunk(false, -600, 130, 170, 50, 2 + ronda),
 				//Largos superiores
-				new Trunk(true, 900, 80, 180, 50, 1 + ronda), 
-				new Trunk(true, 300, 80, 180, 50, 1 + ronda), 
-				new Trunk(true, 600, 80, 180, 50, 1 + ronda),
+				new Trunk(true, 900, 70, 180, 50, 1 + ronda), 
+				new Trunk(true, 300, 70, 180, 50, 1 + ronda), 
+				new Trunk(true, 600, 70, 180, 50, 1 + ronda),
 				//Medianos
-				new Trunk(false, -100, 230, 100, 50, 1 + ronda), 
-				new Trunk(false, -300, 230, 100, 50, 1 + ronda), 
-				new Trunk(false, -500, 230, 100, 50, 1 + ronda), 
+				new Trunk(false, -100, 235, 100, 50, 1 + ronda), 
+				new Trunk(false, -300, 235, 100, 50, 1 + ronda), 
+				new Trunk(false, -500, 235, 100, 50, 1 + ronda), 
 				//Pequeños
-				new Trunk(false, -650, 230, 50, 50, 1 + ronda), 
-				new Trunk(false, -800, 230, 50, 50, 1 + ronda),
-				
+				new Trunk(false, -650, 235, 50, 50, 1 + ronda), 
+				new Trunk(false, -800, 235, 50, 50, 1 + ronda),
+
 				//Cars
 				//Inferiores
 				new Car(false, 600, 430, 1 + ronda), 
@@ -98,8 +112,8 @@ public class FroggerManager {
 				new Car(false, 600, 330, 3 + ronda), 
 				new Car(false, -600, 330, 3 + ronda), 
 				new Car(false, 900, 330, 3 + ronda),
-				
-				
+
+
 				//Turtles
 				//Grupo 1
 				new Turtle(true, 0, 180, 2 + ronda),
@@ -115,27 +129,25 @@ public class FroggerManager {
 				//Grupo 4
 				new Turtle(true, 950, 180, 2 + ronda), 
 				new Turtle(true, 1000, 180, 2 + ronda),
-				
+
 				//Power Ups
 				new Acelerador(new Random().nextInt(750), 430, 50, 50),
 				new Inmunidad(new Random().nextInt(750), 400, 50, 50)
 		};
-		
+
 		//Update
 		Reset();
 	}
-
 
 	public void Update() {
 		if(running) {
 
 			//Time
 			DecreseTime();
-
-			//Movimiento jugadores
+			
+			//MovePlayers
 			playerOne.Move();
-			if(playerTwo != null)
-				playerTwo.Move();
+			if(playerTwo != null) playerTwo.Move();
 
 			//Plataformas
 			for(Collisionable tt: collisionables) {
@@ -147,12 +159,12 @@ public class FroggerManager {
 			}
 		}
 	}
-	
+
 	private void Reset() {
 		//ChecWin
 		cantPlaces = new ArrayList<StopPlace>();
 		contStopPlaces = 0;
-		
+
 		//Objetos para dibujar
 		playerOne.resetPosition();
 		if(playerTwo != null)
@@ -162,15 +174,15 @@ public class FroggerManager {
 		running = true;
 		cont = 0;
 	}
-	
+
 	private void nextRound() {
-		
+
 		for(Collisionable i: collisionables) {
 			if(i instanceof Car) ((Car)i).setCurrentSpeed(((Car) i).getCurrentSpeed() + ronda);
 			if(i instanceof Turtle) ((Turtle)i).setCurrentSpeed(((Turtle) i).getCurrentSpeed() + ronda);
 			if(i instanceof Trunk) ((Trunk)i).setCurrentSpeed(((Trunk) i).getCurrentSpeed() + ronda);
 		}
-		
+
 		Reset();
 	}
 
@@ -188,7 +200,7 @@ public class FroggerManager {
 			cont = 0;
 		}
 	}
-	
+
 	public void CheckWin() {
 		if(ronda<=5) {
 			if(contStopPlaces == 4) {
@@ -208,7 +220,7 @@ public class FroggerManager {
 	}
 
 
-	
+
 	//GETTERS && SETTERS
 	public int getMode() {
 		return mode;
@@ -233,7 +245,7 @@ public class FroggerManager {
 	public void setRunning(boolean running) {
 		this.running = running;
 	}
-	
+
 	public static int getRonda() {
 		return ronda;
 	}
@@ -241,7 +253,7 @@ public class FroggerManager {
 	public static void setRonda(int newRonda) {
 		ronda = newRonda;
 	}
-	
+
 	public static FroggerManager getInstance() {
 		return instance;
 	}
@@ -269,7 +281,7 @@ public class FroggerManager {
 	public static void setCollisionables(Collisionable[] collisionables) {
 		FroggerManager.collisionables = collisionables;
 	}
-	
-	
-	
+
+
+
 }

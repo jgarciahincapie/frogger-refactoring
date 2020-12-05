@@ -50,10 +50,10 @@ public class ChampSelection extends JPanel{
 			mode2();
 		}
 		else if(mode == 3) {
-
+			mode3();
 		}
 		else if(mode == 4) {
-
+			mode4();
 		}
 		else {
 			System.out.println(mode);
@@ -275,10 +275,254 @@ public class ChampSelection extends JPanel{
 	}
 	
 	public void mode3() {
+		JLabel playButton = new JLabel(new ImageIcon(Assets.playButton));
+		JLabel changePlayer1 = new JLabel(new ImageIcon(Assets.changeIcon));
+		JLabel changePlayer2 = new JLabel(new ImageIcon(Assets.changeIcon));
+		JPanel titleJPanel = new JPanel(new BorderLayout());
+		titleJPanel.setOpaque(false);
+		JPanel buttosJPanel = new JPanel(new GridLayout(1,2));
+		buttosJPanel.setOpaque(false);
+		setBackground(Color.black);
+		setLayout(new GridLayout(2,1));
+		titleJPanel.add(playButton);
+		buttosJPanel.add(changePlayer1);
+		buttosJPanel.add(changePlayer2);
+		add(titleJPanel);
+		add(buttosJPanel);
 		
+		//Acciones
+		playButton.addMouseListener(new MouseListener() {
+					
+					@Override
+					public void mouseReleased(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mousePressed(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mouseExited(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						JugarModo3(3, selectP1, selectP2);
+					}
+				});
+
+		changePlayer1.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(selectP1<=1) 					
+					selectP1+=1;
+				else
+					selectP1 = 0;
+				
+				repaint();
+				
+			}
+		});
+		changePlayer2.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(selectP2<=1) 					
+					selectP2+=1;
+				else
+					selectP2 = 0;
+				
+				repaint();
+				
+			}
+		});
 	}
 	
 	public void mode4() {
+		
+		JLabel playButton = new JLabel(new ImageIcon(Assets.playButton));
+		JLabel changePlayer1 = new JLabel(new ImageIcon(Assets.changeIcon));
+		JLabel changePlayer2 = new JLabel(new ImageIcon(Assets.changeIcon));
+		JPanel titleJPanel = new JPanel(new BorderLayout());
+		titleJPanel.setOpaque(false);
+		JPanel buttosJPanel = new JPanel(new GridLayout(1,2));
+		buttosJPanel.setOpaque(false);
+		setBackground(Color.black);
+		setLayout(new GridLayout(2,1));
+		titleJPanel.add(playButton);
+		buttosJPanel.add(changePlayer1);
+		buttosJPanel.add(changePlayer2);
+		add(titleJPanel);
+		add(buttosJPanel);
+		
+		//Acciones
+		playButton.addMouseListener(new MouseListener() {
+					
+					@Override
+					public void mouseReleased(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mousePressed(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mouseExited(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						JugarModo4(4, selectP1, selectP2);
+					}
+				});
+
+		changePlayer1.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(selectP1<=1) 					
+					selectP1+=1;
+				else
+					selectP1 = 0;
+				
+				repaint();
+				
+			}
+		});
+		changePlayer2.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(selectP2<=1) 					
+					selectP2+=1;
+				else
+					selectP2 = 0;
+				
+				repaint();
+				
+			}
+		});
 	}
 	
 	
@@ -290,6 +534,20 @@ public class ChampSelection extends JPanel{
 	}
 	
 	public GameGUI JugarModo2(int mode, int selectP1, int selectP2) {
+		GameGUI gameGUI = new GameGUI(mode, spritesPlayer[selectP1], spritesPlayer[selectP2]);
+		gameGUI.windowSettings(instance);
+		setVisible(false);
+		return gameGUI;
+	}
+	
+	public GameGUI JugarModo3(int mode, int selectP1, int selectP2) {
+		GameGUI gameGUI = new GameGUI(mode, spritesPlayer[selectP1], spritesPlayer[selectP2]);
+		gameGUI.windowSettings(instance);
+		setVisible(false);
+		return gameGUI;
+	}
+	
+	public GameGUI JugarModo4(int mode, int selectP1, int selectP2) {
 		GameGUI gameGUI = new GameGUI(mode, spritesPlayer[selectP1], spritesPlayer[selectP2]);
 		gameGUI.windowSettings(instance);
 		setVisible(false);

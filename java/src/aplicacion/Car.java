@@ -46,6 +46,11 @@ public class Car extends Collisionable implements Platform{
 		}
 	}
 	
+	public void Destroy() {
+		setTrigger(true);
+		sprite = null;
+	}
+	
 	@Override
 	public Rectangle2D getCollider() {
 		return new Rectangle2D.Double(x, y, width, height);
