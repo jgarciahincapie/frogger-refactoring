@@ -108,13 +108,13 @@ public class GameGUI extends JPanel{
 	public void GameOver() {
 		try {
 			hilo.stop();
-	         String data = "\n";
+	         String data = "\n\n";
 	         if(player2 != null)
 					data = ("Fecha: " + new Date().toGMTString() +"\n" +"Modo: " + manager.getMode() + "\n" +"Score Player 1: " + player1.getScore() + "\n" + "Score Player 2:" + player2.getScore() + "\n");
 				else
 					data = ("Fecha: " + new Date().toGMTString() + "\n" + new Date().getDay()+ "/" + new Date().getYear() + "\n" +"Modo: " + manager.getMode() + "\n" +"Score Player 1: " + player1.getScore() + "\n");
 
-	         File f1 = new File("../../ScoresReg.txt");
+	         File f1 = new File("ScoresReg.txt");
 	         if(!f1.exists()) {
 	            f1.createNewFile();
 	         }
@@ -149,10 +149,6 @@ public class GameGUI extends JPanel{
 		jFrame.dispose();
 		jFrame.setVisible(true);
 	}
-
-
-
-
 
 
 	//Getters && setters

@@ -66,8 +66,10 @@ public class Turtle extends Collisionable implements Platform{
 	public void ActivateTrigger(Player target) {
 		if(!isTrigger()){
 			target.setX((int)getCollider().getCenterX() - target.getWidth()/2);
+			target.setRiding(true);
 		}
 		else {
+			target.setRiding(false);
 			target.Dead();
 		}
 	}

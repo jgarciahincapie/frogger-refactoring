@@ -1,0 +1,12 @@
+Fecha: 8 Dec 2020 01:55:14 GMT
+Modo: 4
+Score Player 1: 0
+Score Player 2:20
+Fecha: 8 Dec 2020 01:56:19 GMT
+Modo: 3
+Score Player 1: 70
+Score Player 2:0
+Fecha: 8 Dec 2020 02:04:06 GMT
+1/120
+Modo: 1
+Score Player 1: 0

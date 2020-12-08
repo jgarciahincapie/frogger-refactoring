@@ -12,7 +12,7 @@ public class PlayerNormal extends Player{
 
 	@Override
 	public void Move() {
-	
+		//Check Limits
 		if(x<0 || x>750 || y<=40 || y> 600) {
 			Dead();
 		}

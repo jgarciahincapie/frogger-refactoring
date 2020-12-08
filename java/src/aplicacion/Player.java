@@ -38,6 +38,12 @@ public abstract class Player {
 	public void OnCollisionExit() {
 		isRiding = false;
 	}
+	
+	public void CheckWater() {
+		if(y < 280 && y > 0 && !isRiding) {
+			Dead();		
+		}
+	}	
 
 	public void resetPosition() {
 		x = posInicialX;

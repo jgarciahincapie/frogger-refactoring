@@ -190,11 +190,14 @@ public class FroggerManager {
 			
 			//MovePlayers
 			playerOne.Move();
+			playerOne.CheckWater();
 			if(playerTwo != null) {
 				if(playerTwo.getLives() <= 0)
 					running = false;
-				else
+				else {
 					playerTwo.Move();
+					playerTwo.CheckWater();
+				}
 			}
 						
 			//Lives
