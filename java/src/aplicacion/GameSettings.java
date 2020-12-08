@@ -7,6 +7,8 @@ public class GameSettings {
 	public static int mode;
 	public static BufferedImage player1;
 	public static BufferedImage player2;
+	public static String machine1, machine2;
+
 	public static int lives = 7;
 	public static int dificultad = 0;
 	
@@ -66,6 +68,19 @@ public class GameSettings {
 		GameSettings.instance = instance;
 	}
 	
+	public static String getMachine1() {
+		return machine1;
+	}
 	
-
+	public static void setMachine1(String machine1) {
+		GameSettings.machine1 = machine1;
+	}
+	
+	public static String getMachine2() {
+		return machine2;
+	}
+	
+	public static void setMachine2(String machine2) {
+		GameSettings.machine2 = machine2;
+	}
 }

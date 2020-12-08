@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
@@ -22,6 +23,7 @@ import aplicacion.GameSettings;
 public class ChampSelection extends JPanel{
 
 	private BufferedImage[] spritesPlayer;
+	private String[] machines;
 	private GameGUI gameGUI;
 	private JFrame instance;
 	private int mode;
@@ -35,6 +37,7 @@ public class ChampSelection extends JPanel{
 	public ChampSelection(JFrame jFrame, int mode) {
 		this.mode = mode;
 		spritesPlayer = new BufferedImage[] {Assets.playerNormal, Assets.playerSexy, Assets.playerErotic};
+		machines = new String[] {"Irreflexiva", "Temeraria", "Precavida"};
 		activeSpriteP1 = new JLabel(new ImageIcon(spritesPlayer[selectP1]));
 		activeSpriteP2 = new JLabel(new ImageIcon(spritesPlayer[selectP2]));
 		playButton = new JLabel(new ImageIcon(Assets.playButton));
@@ -64,12 +67,29 @@ public class ChampSelection extends JPanel{
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		g.setColor(Color.white);
+		g.setFont(new Font("Serif", Font.BOLD, 30));
+	
 		if(mode == 1) {
 			g.drawImage(spritesPlayer[selectP1], 350, 250, 100, 100, null);
 		}
-		else if(mode == 2) {
+		else if(mode == 2){
 			g.drawImage(spritesPlayer[selectP1], 200, 250, 100, 100, null);
 			g.drawImage(spritesPlayer[selectP2], 450, 250, 100, 100, null);
+			
+		}
+		else if(mode == 3) {
+			g.drawImage(spritesPlayer[selectP1], 200, 250, 100, 100, null);
+			g.drawImage(spritesPlayer[selectP2], 450, 250, 100, 100, null);
+			//Machines
+			g.drawString(machines[selectP2], 450, 240);
+		}
+		else if(mode == 4) {
+			g.drawImage(spritesPlayer[selectP1], 200, 250, 100, 100, null);
+			g.drawImage(spritesPlayer[selectP2], 450, 250, 100, 100, null);
+			//Machines
+			g.drawString(machines[selectP1], 200, 240);
+			g.drawString(machines[selectP2], 450, 240);
 		}
 	}
 
@@ -319,7 +339,7 @@ public class ChampSelection extends JPanel{
 					
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						JugarModo3(3, selectP1, selectP2);
+						JugarModo2(3, selectP1, selectP2);
 					}
 				});
 
@@ -445,7 +465,7 @@ public class ChampSelection extends JPanel{
 					
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						JugarModo4(4, selectP1, selectP2);
+						JugarModo2(4, selectP1, selectP2);
 					}
 				});
 
@@ -527,28 +547,14 @@ public class ChampSelection extends JPanel{
 	
 	
 	public GameGUI JugarModo1(int mode, int selectP1) {
-		GameGUI gameGUI = new GameGUI(mode, spritesPlayer[selectP1], null);
+		GameGUI gameGUI = new GameGUI(mode, spritesPlayer[selectP1], null, null);
 		gameGUI.windowSettings(instance);
 		setVisible(false);
 		return gameGUI;
 	}
 	
 	public GameGUI JugarModo2(int mode, int selectP1, int selectP2) {
-		GameGUI gameGUI = new GameGUI(mode, spritesPlayer[selectP1], spritesPlayer[selectP2]);
-		gameGUI.windowSettings(instance);
-		setVisible(false);
-		return gameGUI;
-	}
-	
-	public GameGUI JugarModo3(int mode, int selectP1, int selectP2) {
-		GameGUI gameGUI = new GameGUI(mode, spritesPlayer[selectP1], spritesPlayer[selectP2]);
-		gameGUI.windowSettings(instance);
-		setVisible(false);
-		return gameGUI;
-	}
-	
-	public GameGUI JugarModo4(int mode, int selectP1, int selectP2) {
-		GameGUI gameGUI = new GameGUI(mode, spritesPlayer[selectP1], spritesPlayer[selectP2]);
+		GameGUI gameGUI = new GameGUI(mode, spritesPlayer[selectP1], spritesPlayer[selectP2], new String[] {machines[selectP1], machines[selectP2]});
 		gameGUI.windowSettings(instance);
 		setVisible(false);
 		return gameGUI;

@@ -14,6 +14,7 @@ public class FroggerManager {
 	//Game
 	private Player playerOne;
 	private Player playerTwo;
+	private String machine1, machine2;
 	private Collisionable frogirl;
 	public static Collisionable[] collisionables;
 
@@ -35,16 +36,6 @@ public class FroggerManager {
 		this.p1Sprite = p1Sprite;
 		this.p2Sprite = p2Sprite;		
 		ronda = 0;
-		System.out.println(mode);
-		if(mode == 1)
-			GameMode1();
-		else if(mode == 2)
-			GameMode2();
-		else if(mode == 3)
-			GameMode3();
-		else if(mode == 4)
-			GameMode4();
-		Start();
 	}
 
 	private void GameMode1() {
@@ -59,16 +50,35 @@ public class FroggerManager {
 	
 	private void GameMode3() {
 		playerOne = new PlayerNormal(260, 480, 1, p1Sprite);
-		playerTwo = new MachineIrreflexive(520, 480, 2, p2Sprite);
+		//Machine 2
+		if(machine2 == "Irreflexiva")
+			playerTwo = new MachineIrreflexive(520, 480, 2, p2Sprite);
+		else if(machine2 == "Temeraria")
+			playerTwo = new MachineBrave(520, 480, 2, p2Sprite);
+		else if(machine2 == "Precavida")
+			playerTwo = new MachineCaution(520, 480, 2, p2Sprite);
 	}
 	
 	private void GameMode4() {
-		playerOne = new MachineIrreflexive(260, 480, 1, p1Sprite);
-		playerTwo = new MachineBrave(520, 480, 2, p2Sprite);
+		//Machine 1
+		if(machine1 == "Irreflexiva")
+			playerOne = new MachineIrreflexive(260, 480, 1, p1Sprite);
+		else if(machine1 == "Temeraria")
+			playerOne = new MachineBrave(260, 480, 1, p1Sprite);
+		else if(machine1 == "Precavida")
+			playerOne = new MachineCaution(260, 480, 1, p1Sprite);
+		
+		//Machine 2
+		if(machine2 == "Irreflexiva")
+			playerTwo = new MachineIrreflexive(520, 480, 2, p2Sprite);
+		else if(machine2 == "Temeraria")
+			playerTwo = new MachineBrave(520, 480, 2, p2Sprite);
+		else if(machine2 == "Precavida")
+			playerTwo = new MachineCaution(520, 480, 2, p2Sprite);
 	}
 
 	//Instancia una unica vez
-	private void Start() {
+	public void Start() {
 
 		//Instanciar todos los objetos
 		collisionables = new Collisionable[] {
@@ -154,7 +164,16 @@ public class FroggerManager {
 				//Girl
 				new Frogirl(380, 280, 50, 50)
 		};
-
+		
+		if(mode == 1)
+			GameMode1();
+		else if(mode == 2)
+			GameMode2();
+		else if(mode == 3)
+			GameMode3();
+		else if(mode == 4)
+			GameMode4();
+		
 		//Update
 		Reset();
 	}
@@ -329,4 +348,22 @@ public class FroggerManager {
 	public void setFrogirl(Collisionable frogirl) {
 		this.frogirl = frogirl;
 	}
+	
+	public String getMachine1() {
+		return machine1;
+	}
+
+	public void setMachine1(String machine1) {
+		System.out.println("Fijo machine 1: " + machine1);
+		this.machine1 = machine1;
+	}
+
+	public String getMachine2() {
+		return machine2;
+	}
+
+	public void setMachine2(String machine2) {
+		this.machine2 = machine2;
+	}
+
 }

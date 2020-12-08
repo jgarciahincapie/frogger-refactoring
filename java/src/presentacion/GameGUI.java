@@ -23,9 +23,15 @@ public class GameGUI extends JPanel{
 	//Thread
 	private Hilo hilo;
 
-	public GameGUI(int mode, BufferedImage p1Sprite, BufferedImage p2Sprite) {
+	public GameGUI(int mode, BufferedImage p1Sprite, BufferedImage p2Sprite, String[] machines) {
 		Assets.Start();
 		manager = new FroggerManager(mode, p1Sprite, p2Sprite);
+		if(mode == 3) manager.setMachine2(machines[1]);
+		else if(mode == 4) {
+			manager.setMachine1(machines[0]);
+			manager.setMachine2(machines[1]);
+		}
+		manager.Start();
 		toDraw();
 		hilo = new Hilo(manager, this);
 		hilo.start();
@@ -94,16 +100,15 @@ public class GameGUI extends JPanel{
 			}
 
 			GameOver();
-			hilo.stop();
 		}
 
 		Toolkit.getDefaultToolkit().sync();
 	}
 
 	public void GameOver() {
-		
 		try {
-	         String data = "";
+			hilo.stop();
+	         String data = "\n";
 	         if(player2 != null)
 					data = ("Fecha: " + new Date().toGMTString() +"\n" +"Modo: " + manager.getMode() + "\n" +"Score Player 1: " + player1.getScore() + "\n" + "Score Player 2:" + player2.getScore() + "\n");
 				else
@@ -118,8 +123,6 @@ public class GameGUI extends JPanel{
 	         BufferedWriter bw = new BufferedWriter(fileWritter);
 	         bw.write(data);
 	         bw.close();
-	         JOptionPane pane = new JOptionPane();
-	         pane.showMessageDialog(null, "Datos guardados satisfacotiramente");
 	      } catch(IOException e){
 	    	  JOptionPane pane = new JOptionPane();
 	    	  pane.showMessageDialog(null, "Ocurrio un error guardando los datos");

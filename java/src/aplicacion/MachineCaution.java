@@ -25,6 +25,11 @@ public class MachineCaution extends Player implements Machine{
 
 	@Override
 	public void Move() {
+		
+		if(x<0 || x>750 || y<=40 || y> 600) {
+			Dead();
+		}
+		
 		dirF = "";
 		if(currentTime >= timeToChoise) {
 			dirF = ChooseMove();

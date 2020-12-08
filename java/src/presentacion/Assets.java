@@ -102,7 +102,6 @@ public class Assets {
 			playerToxic = ImageIO.read(new File("Assets/Players/frogToxic.png"));
 			playerErotic = ImageIO.read(new File("Assets/Players/frogUnique.png"));
 			playerDead = ImageIO.read(new File("Assets/Players/frogX.png"));
-			froggy = ImageIO.read(new File("Assets/Players/frogX.png"));
 			froGirl= ImageIO.read(new File("Assets/Players/frogChica0.png"));
 			playerSexy = ImageIO.read(new File("Assets/Players/frogSexy.png"));
 			

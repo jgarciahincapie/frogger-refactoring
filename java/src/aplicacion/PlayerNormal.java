@@ -12,7 +12,12 @@ public class PlayerNormal extends Player{
 
 	@Override
 	public void Move() {
-		if(player == 1) {			
+	
+		if(x<0 || x>750 || y<=40 || y> 600) {
+			Dead();
+		}
+		
+		if(player == 1) {		
 			if(EventosKeyboard.up && getY() > 50){
 				OnCollisionExit();
 				this.score +=10;
