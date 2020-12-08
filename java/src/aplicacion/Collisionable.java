@@ -3,14 +3,14 @@ package aplicacion;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
-public class Collisionable implements Platform{
+public abstract class Collisionable implements Platform{
 	
-	private String tag;
-	private boolean isTrigger;
-	private int x;
-	private int y;
-	private int width;
-	private int height;
+	protected String tag;
+	protected boolean isTrigger;
+	protected int x;
+	protected int y;
+	protected int width;
+	protected int height;
 
 	public Collisionable(String tag, int x, int y, int width, int height) {
 		this.tag = tag;
@@ -20,6 +20,8 @@ public class Collisionable implements Platform{
 		this.height = height;
 		isTrigger = false;
 	}
+	
+	public abstract void ActivateTrigger(Player target);
 	
 	public Rectangle2D getCollider() {
 		return new Rectangle2D.Double(x, y+5, width, height-10);

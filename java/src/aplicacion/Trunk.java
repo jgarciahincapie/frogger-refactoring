@@ -14,8 +14,6 @@ public class Trunk extends Collisionable{
 	private int height;
 	private double currentSpeed;
 	private BufferedImage sprite;
-	
-	private boolean isTrigger = false;
 
 	public Trunk(boolean left, int x, int y, int width, int height,double speed) {
 		super("trunk", x, y, width, 50);
@@ -44,6 +42,12 @@ public class Trunk extends Collisionable{
 		else {
 			x += currentSpeed;
 		}
+	}
+	
+	@Override
+	public void ActivateTrigger(Player target) {
+		target.isRiding = true;
+		target.setX((int)getCollider().getCenterX() - target.getWidth()/2);
 	}
 	
 	@Override

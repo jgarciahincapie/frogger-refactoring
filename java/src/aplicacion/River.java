@@ -2,6 +2,8 @@ package aplicacion;
 
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import presentacion.Assets;
 
@@ -21,6 +23,11 @@ public class River extends Collisionable{
 		y = 0;
 		width = 800;
 		height = 280;
+	}
+	
+	@Override
+	public void ActivateTrigger(Player target) {
+		
 	}
 	
 	public Rectangle2D getCollider() {
@@ -74,8 +81,5 @@ public class River extends Collisionable{
 	public void setHeight(int height) {
 		this.height = height;
 	}
-	
-	
-
 
 }

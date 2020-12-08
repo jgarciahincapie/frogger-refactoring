@@ -34,7 +34,7 @@ public class ChampSelection extends JPanel{
 
 	public ChampSelection(JFrame jFrame, int mode) {
 		this.mode = mode;
-		spritesPlayer = new BufferedImage[] {Assets.playerNormal, Assets.playerToxic, Assets.playerErotic};
+		spritesPlayer = new BufferedImage[] {Assets.playerNormal, Assets.playerSexy, Assets.playerErotic};
 		activeSpriteP1 = new JLabel(new ImageIcon(spritesPlayer[selectP1]));
 		activeSpriteP2 = new JLabel(new ImageIcon(spritesPlayer[selectP2]));
 		playButton = new JLabel(new ImageIcon(Assets.playButton));

@@ -2,10 +2,9 @@ package aplicacion;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.PrimitiveIterator.OfDouble;
 
 import presentacion.Assets;
-import presentacion.GameGUI;
+import sun.net.www.content.audio.x_aiff;
 
 public class FroggerManager {
 
@@ -15,6 +14,7 @@ public class FroggerManager {
 	//Game
 	private Player playerOne;
 	private Player playerTwo;
+	private Collisionable frogirl;
 	public static Collisionable[] collisionables;
 
 	//Configuracion juego
@@ -27,10 +27,7 @@ public class FroggerManager {
 	public static int ronda;
 	private BufferedImage p1Sprite;
 	private BufferedImage p2Sprite;
-
-	//Sistema Update
-	private Hilo thread;
-
+	
 	public FroggerManager(int mode, BufferedImage p1Sprite, BufferedImage p2Sprite){
 		if(instance == null) instance = this;
 
@@ -101,17 +98,17 @@ public class FroggerManager {
 
 				//Cars
 				//Inferiores
-				new Car(false, 600, 430, 1 + ronda), 
+				new MotorCycle(false, -600, 430, 80, 50, 1 + ronda),
 				new Car(false, -750, 430, 1 + ronda), 
-				new Car(false, 900, 430, 1 + ronda),
+				new MotorCycle(false, 900, 430, 80, 50, 1 + ronda), 
 				//Medios
+				new Biker(false, -350, 380, 80, 50, 2 + ronda),
 				new Car(false, -600, 380, 2 + ronda), 
-				new Car(false, -350, 380, 2 + ronda), 
 				new Car(false, 0, 380, 2 + ronda),
 				//Superiores
-				new Car(false, 600, 330, 3 + ronda), 
+				new MotorCycle(false, -300, 330, 80, 50, 3 + ronda),
 				new Car(false, -600, 330, 3 + ronda), 
-				new Car(false, 900, 330, 3 + ronda),
+				new Carreta(false, -900, 330, 80, 50, 3 + ronda),
 
 
 				//Turtles sup
@@ -146,8 +143,16 @@ public class FroggerManager {
 				new Turtle(true, 1000, 195, 2 + ronda),
 
 				//Power Ups
-				new Acelerador(new Random().nextInt(750), 430, 50, 50),
-				new Inmunidad(new Random().nextInt(750), 400, 50, 50)
+				new Acelerador(new Random().nextInt(750), 480, 50, 50),
+				new Acelerador(new Random().nextInt(750), 155, 50, 50),
+				new Inmunidad(new Random().nextInt(750), 480, 50, 50),
+				new Fly(new Random().nextInt(750), 280, 50, 50),
+				new Toxicity(new Random().nextInt(750), 115, 50, 50),
+				new Puddle(new Random().nextInt(750), 280, 50, 50),
+				new Puddle(new Random().nextInt(750), 280, 50, 50),
+				
+				//Girl
+				new Frogirl(380, 280, 50, 50)
 		};
 
 		//Update
@@ -159,10 +164,25 @@ public class FroggerManager {
 
 			//Time
 			DecreseTime();
+			//frogirl
+			if(time>=16 && ((Frogirl)frogirl).isTrigger) {		
+				((Frogirl)frogirl).Show();
+			}
 			
 			//MovePlayers
 			playerOne.Move();
-			if(playerTwo != null) playerTwo.Move();
+			if(playerTwo != null) {
+				if(playerTwo.getLives() <= 0)
+					running = false;
+				else
+					playerTwo.Move();
+			}
+						
+			//Lives
+			if(playerOne.getLives() <= 0) {
+				running = false;
+			}
+			
 
 			//Plataformas
 			for(Collisionable tt: collisionables) {
@@ -171,6 +191,10 @@ public class FroggerManager {
 					cantPlaces.add((StopPlace)tt);
 				}
 				contStopPlaces = cantPlaces.size();
+				
+				//Animaciones
+				if(tt instanceof StopPlace)
+					((StopPlace)tt).Animation();
 			}
 		}
 	}
@@ -182,6 +206,7 @@ public class FroggerManager {
 
 		//Objetos para dibujar
 		playerOne.resetPosition();
+		frogirl = collisionables[collisionables.length -1];
 		if(playerTwo != null)
 			playerTwo.resetPosition();
 
@@ -210,7 +235,7 @@ public class FroggerManager {
 				time+=8;				
 			}
 			else {
-				time = 0;	
+				running = false;	
 			}
 			cont = 0;
 		}
@@ -230,7 +255,7 @@ public class FroggerManager {
 			}
 		}
 		else {
-			System.out.print("Juego terminado");
+			running = false;
 		}
 	}
 
@@ -297,6 +322,11 @@ public class FroggerManager {
 		FroggerManager.collisionables = collisionables;
 	}
 
+	public Collisionable getFrogirl() {
+		return frogirl;
+	}
 
-
+	public void setFrogirl(Collisionable frogirl) {
+		this.frogirl = frogirl;
+	}
 }

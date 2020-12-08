@@ -1,5 +1,6 @@
 package aplicacion;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import presentacion.Assets;
 
@@ -14,12 +15,19 @@ public class Acelerador extends Collisionable implements PowerUp{
 
 	@Override
 	public void ActivatePower() {
-		super.setTrigger(true);
-		sprite = null;
+		setX(new Random().nextInt(750));
 	}
 	
 	@Override
 	public BufferedImage getSprite() {
 		return this.sprite;
+	}
+
+	@Override
+	public void ActivateTrigger(Player target) {
+		if(!isTrigger()) {
+			target.setSpeedY(100);			
+			ActivatePower();
+		}
 	}
 }

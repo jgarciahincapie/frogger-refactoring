@@ -5,19 +5,18 @@ import java.util.Random;
 
 import presentacion.Assets;
 
-public class Inmunidad extends Collisionable implements PowerUp {
+public class Fly extends Collisionable implements PowerUp {
 	
 	private BufferedImage sprite;
 
-	public Inmunidad(int x, int y, int width, int height) {
-		super("inmune",x, y, width, height);
-		sprite = Assets.caparason;
+	public Fly(int x, int y, int width, int height) {
+		super("fly",x, y, width, height);
+		sprite = Assets.wings;
 	}
 
 	@Override
 	public void ActivatePower() {
 		setX(new Random().nextInt(750));
-		
 	}
 	
 	@Override
@@ -29,9 +28,8 @@ public class Inmunidad extends Collisionable implements PowerUp {
 	public void ActivateTrigger(Player target) {
 		if(!isTrigger()) {
 			ActivatePower();
-			target.isTrigger = true;
+			target.isFlying = true;
 		}
-		
 	}
 
 }

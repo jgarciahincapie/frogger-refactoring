@@ -2,10 +2,6 @@ package aplicacion;
 
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import presentacion.Assets;
 
 public abstract class Player {
 
@@ -13,7 +9,7 @@ public abstract class Player {
 	protected int x, y, posInicialX, posInicialY, width, height;
 	protected double speedX, speedY;
 	protected boolean isTrigger, isAlive, isRiding, isFlying, isToxic;
-	protected int player, score, lives, timeInGrass;
+	protected int player, score, lives;
 
 	public Player(int x, int y, int player, BufferedImage sprite) {
 		posInicialX = x;
@@ -38,18 +34,21 @@ public abstract class Player {
 	public abstract void Move();
 
 	public abstract void OnCollisionEnter(Collisionable collision);
+	
+	public void OnCollisionExit() {
+		isRiding = false;
+	}
 
 	public void resetPosition() {
 		x = posInicialX;
 		y = posInicialY;
-		timeInGrass = 0;
 		speedY = 50;
 		isRiding = false;
 		isFlying = false;
 		this.sprite = original;
 	}
 
-	public abstract void makePoint();
+	public abstract void makePoint(int bonus);
 	public abstract void Dead();
 
 	public boolean Collision(Rectangle2D col1) {
@@ -60,7 +59,7 @@ public abstract class Player {
 	}
 
 	public Rectangle2D getCollider() {
-		return new Rectangle2D.Double(x, y+10, width, height-20);
+		return new Rectangle2D.Double(x, y+15, width, height-30);
 	}
 
 

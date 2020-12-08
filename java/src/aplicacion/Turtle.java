@@ -2,10 +2,8 @@ package aplicacion;
 
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.ThreadLocalRandom;
 
 import presentacion.Assets;
 
@@ -36,10 +34,17 @@ public class Turtle extends Collisionable implements Platform{
 
 	@Override
 	public void autoMove() {
-		if(contAnim < ThreadLocalRandom.current().nextInt(500, 1000)) {			
+		if(contAnim < 1000) {			
 			contAnim++;
+			if(contAnim <= 500) {
+				Hide();
+			}
+			else {
+				Show();
+			}
+			
 		}else {
-			Hide();
+			contAnim = 0;
 		}
 		
 		if(x < -150 && left) {
@@ -57,20 +62,42 @@ public class Turtle extends Collisionable implements Platform{
 		}
 	}
 	
+	@Override
+	public void ActivateTrigger(Player target) {
+		if(!isTrigger()){
+			target.setX((int)getCollider().getCenterX() - target.getWidth()/2);
+		}
+		else {
+			target.Dead();
+		}
+	}
+	
 	public void Hide() {
-		sprite = Assets.turtleMid;
 		Timer timer = new Timer();
 		TimerTask task1 = new TimerTask() {
 			@Override
 			public void run() {
-				sprite = Assets.turtleIdle;
-				setTrigger(false);
-				contAnim = 0;
+				sprite = Assets.turtleMid;
+				isTrigger = true;
 				timer.cancel();
 			}
 		};
 
 
+		timer.schedule(task1, 3000);
+	}
+	
+	public void Show() {
+		Timer timer = new Timer();
+		TimerTask task1 = new TimerTask() {
+			@Override
+			public void run() {
+				sprite = Assets.turtleIdle;
+				isTrigger = false;
+				timer.cancel();
+			}
+		};
+		
 		timer.schedule(task1, 3000);
 	}
 	

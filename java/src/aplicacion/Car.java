@@ -3,6 +3,8 @@ package aplicacion;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import presentacion.Assets;
 
@@ -46,11 +48,31 @@ public class Car extends Collisionable implements Platform{
 		}
 	}
 	
+	@Override
+	public void ActivateTrigger(Player target) {
+		if(target.isTrigger == false) {
+			target.Dead();
+		}
+		else {
+			Destroy();
+			Timer timer = new Timer();
+			TimerTask task = new TimerTask() {
+
+				@Override
+				public void run() {
+					target.isTrigger = false;
+					timer.cancel();
+				}
+			};
+			timer.schedule(task, 1000);
+		}
+		
+	}
+	
 	public void Destroy() {
 		setTrigger(true);
 		sprite = null;
 	}
-	
 	@Override
 	public Rectangle2D getCollider() {
 		return new Rectangle2D.Double(x, y, width, height);
@@ -112,5 +134,6 @@ public class Car extends Collisionable implements Platform{
 	public void setSprite(BufferedImage sprite) {
 		this.sprite = sprite;
 	}
+
 
 }

@@ -1,9 +1,6 @@
 package aplicacion;
 
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import presentacion.Assets;
 
@@ -17,45 +14,53 @@ public class PlayerNormal extends Player{
 	public void Move() {
 		if(player == 1) {			
 			if(EventosKeyboard.up && getY() > 50){
+				OnCollisionExit();
 				this.score +=10;
-				this.y -= speedY;
+				this.y -= getY() >= 280 ? speedY : speedY - 12;
 				EventosKeyboard.up = false;
 			}
 			else if(EventosKeyboard.down && getY() < 450) {
-				this.y += speedY;
+				OnCollisionExit();
+				this.y += getY() >= 280 ? speedY : speedY - 12;
 				EventosKeyboard.down = false;
 			}
 			else if(EventosKeyboard.left && getX() > 25) {
+				OnCollisionExit();
 				this.x -= speedX;
 				EventosKeyboard.left = false;
 			}
 			else if(EventosKeyboard.rigth && getX() < 730) {
+				OnCollisionExit();
 				this.x += speedX;
 				EventosKeyboard.rigth = false;
 			}
 		}
 		else if(player == 2) {
 			if(EventosKeyboard.upArrow && getY() > 50){
+				OnCollisionExit();
 				this.score +=10;
-				this.y -= speedY;
+				this.y -= getY() >= 280 ? speedY : speedY - 12;
 				EventosKeyboard.upArrow = false;
 			}
 			else if(EventosKeyboard.downArrow && getY() < 450) {
-				this.y += speedY;
+				OnCollisionExit();
+				this.y += getY() >= 280 ? speedY : speedY - 12;
 				EventosKeyboard.downArrow = false;
 			}
 			else if(EventosKeyboard.leftArrow && getX() > 25) {
+				OnCollisionExit();
 				this.x -= speedX;
 				EventosKeyboard.leftArrow = false;
 			}
 			else if(EventosKeyboard.rigthArrow && getX() < 730) {
+				OnCollisionExit();
 				this.x += speedX;
 				EventosKeyboard.rigthArrow = false;
 			}
 		}
 		
 		for(Collisionable i: FroggerManager.collisionables) {
-			if(Collision(i.getCollider())) {				
+			if(Collision(i.getCollider())) {
 				OnCollisionEnter(i);
 			}
 		}
@@ -63,69 +68,12 @@ public class PlayerNormal extends Player{
 	
 	@Override
 	public void OnCollisionEnter(Collisionable collision) {
-		if(collision.getTag() == "trunk") {
-			isRiding = true;
-			setX((int)collision.getCollider().getCenterX() - getWidth()/2);
-		}
-		
-		else if(collision.getTag() == "turtle") {
-			if(!collision.isTrigger()){
-				isRiding = true;
-				setX((int)collision.getCollider().getCenterX() - getWidth()/2);
-			}
-			else {
-				isRiding = false;
-			}
-		}
-
-		else if(collision.getTag() == "car" && ((Car)collision).isTrigger() == false) {
-			if(isTrigger == false) {
-				Dead();
-			}
-			else {
-				((Car)collision).Destroy();
-				isTrigger = false;
-			}
-		}
-
-		else if(collision.getTag() == "finalStop") {
-			((StopPlace)collision).setSprite(Assets.froggy);
-			if(!((StopPlace)collision).isTrigger())
-				makePoint();
-			((StopPlace)collision).setTrigger(true);
-		}
-		else if (collision.getTag() == "grass" && isTrigger == false) {
-			timeInGrass ++;
-			if(timeInGrass >=1000) {
-				Dead();
-				timeInGrass = 0;
-			}
-		}
-		//Power ups
-		else if (collision.getTag() == "speedMax") {
-			if(!((PowerUp)collision).isTrigger()) {
-				setSpeedY(100);				
-				((PowerUp)collision).ActivatePower();
-			}
-		}
-		else if (collision.getTag() == "inmune") {
-			if(!((PowerUp)collision).isTrigger()) {
-				isTrigger = true;
-				((PowerUp)collision).ActivatePower();
-			}
-		}
-		//Falta implmentar la clase
-		else if(collision.getTag() == "alas") {
-			isFlying = true;
-		}
-		//Falta implementar la clase
-		else if(collision.getTag() == "toxic") {
-			isToxic = true;
-		}
+		collision.ActivateTrigger(this);
 	}
+	
 	@Override
-	public void makePoint() {
-		super.score +=50;
+	public void makePoint(int bonus) {
+		super.score +=50 + bonus;
 		FroggerManager.getInstance().CheckWin();
 		resetPosition();
 	}
@@ -134,7 +82,7 @@ public class PlayerNormal extends Player{
 	public void Dead() {
 		sprite = Assets.playerDead;
 		lives--;
-		score -= score>0?100:0;
+		score -= score-100>0 ? 100 : score;
 		resetPosition();
 		isTrigger = false;
 	}

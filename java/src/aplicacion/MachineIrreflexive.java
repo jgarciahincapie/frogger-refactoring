@@ -67,70 +67,14 @@ public class MachineIrreflexive extends Player implements Machine{
 
 	@Override
 	public void OnCollisionEnter(Collisionable collision) {
-		if(collision.getTag() == "trunk") {
-			isRiding = true;
-			setX((int)collision.getCollider().getCenterX() - getWidth()/2);
-		}
 		
-		else if(collision.getTag() == "turtle") {
-			if(!collision.isTrigger()){
-				isRiding = true;
-				setX((int)collision.getCollider().getCenterX() - getWidth()/2);
-			}
-			else {
-				isRiding = false;
-			}
-		}
+		collision.ActivateTrigger(this);
 		
-		else if(collision.getTag() == "car" && ((Car)collision).isTrigger() == false) {
-			if(isTrigger == false) {
-				Dead();
-			}
-			else {
-				((Car)collision).Destroy();
-				isTrigger = false;
-			}
-		}
-
-		else if(collision.getTag() == "finalStop") {
-			((StopPlace)collision).setSprite(Assets.froggy);
-			if(!((StopPlace)collision).isTrigger())
-				makePoint();
-			((StopPlace)collision).setTrigger(true);
-		}
-		else if (collision.getTag() == "grass" && isTrigger == false) {
-			timeInGrass ++;
-			if(timeInGrass >=1000) {
-				Dead();
-				timeInGrass = 0;
-			}
-		}
-		//Power ups
-		else if (collision.getTag() == "speedMax") {
-			if(!((PowerUp)collision).isTrigger()) {
-				setSpeedY(100);				
-				((PowerUp)collision).ActivatePower();
-			}
-		}
-		else if (collision.getTag() == "inmune") {
-			if(!((PowerUp)collision).isTrigger()) {
-				isTrigger = true;
-				((PowerUp)collision).ActivatePower();
-			}
-		}
-		//Falta implmentar la clase
-		else if(collision.getTag() == "alas") {
-			isFlying = true;
-		}
-		//Falta implementar la clase
-		else if(collision.getTag() == "toxic") {
-			isToxic = true;
-		}
 	}
 	
 	@Override
-	public void makePoint() {
-		super.score +=50;
+	public void makePoint(int bonus) {
+		super.score +=50 + bonus;
 		FroggerManager.getInstance().CheckWin();
 		resetPosition();
 	}
@@ -139,7 +83,7 @@ public class MachineIrreflexive extends Player implements Machine{
 	public void Dead() {
 		sprite = Assets.playerDead;
 		lives--;
-		score -= score>0?100:0;
+		score -= score-100>0 ? 100 : score;
 		resetPosition();
 		isTrigger = false;
 	}
