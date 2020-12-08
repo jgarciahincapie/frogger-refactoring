@@ -20,6 +20,7 @@ public class Carreta extends Collisionable implements Platform{
 	public void ActivateTrigger(Player target) {
 		target.isRiding = true;
 		target.isToxic = true;
+		target.setSprite(Assets.playerToxic);
 		target.setX((int)getCollider().getCenterX() - target.getWidth()/2);
 	}
 	
@@ -39,6 +40,16 @@ public class Carreta extends Collisionable implements Platform{
 		else {
 			x += currentSpeed;
 		}
+	}
+	
+	@Override
+	public void setCurrentSpeed(int speed) {
+		currentSpeed = speed;
+	}
+	
+	@Override
+	public double getcurrentSpeed() {
+		return currentSpeed;
 	}
 	
 	@Override

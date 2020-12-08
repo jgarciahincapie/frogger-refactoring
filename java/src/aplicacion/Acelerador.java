@@ -30,4 +30,14 @@ public class Acelerador extends Collisionable implements PowerUp{
 			ActivatePower();
 		}
 	}
+	
+	@Override
+	public double getcurrentSpeed() {
+		return 0;
+	}
+
+	@Override
+	public void setCurrentSpeed(int speed) {
+		
+	}
 }

@@ -32,4 +32,15 @@ public class Puddle extends Collisionable implements PowerUp{
 		setX(new Random().nextInt(750));
 		
 	}
+	
+	@Override
+	public double getcurrentSpeed() {
+		return 0;
+	}
+	
+	@Override
+	public void setCurrentSpeed(int speed) {
+	}
+	
+	
 }

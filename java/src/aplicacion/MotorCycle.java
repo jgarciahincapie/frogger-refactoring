@@ -44,4 +44,14 @@ public class MotorCycle extends Collisionable implements Platform{
 		return sprite;
 	}
 	
+	@Override
+	public void setCurrentSpeed(int speed) {
+		currentSpeed = speed;
+	}
+	
+	@Override
+	public double getcurrentSpeed() {
+		return currentSpeed;
+	}
+	
 }

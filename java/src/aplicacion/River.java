@@ -2,8 +2,6 @@ package aplicacion;
 
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import presentacion.Assets;
 
@@ -28,6 +26,15 @@ public class River extends Collisionable{
 	@Override
 	public void ActivateTrigger(Player target) {
 		
+	}
+	
+	@Override
+	public void setCurrentSpeed(int speed) {
+	}
+	
+	@Override
+	public double getcurrentSpeed() {
+		return 0;
 	}
 	
 	public Rectangle2D getCollider() {

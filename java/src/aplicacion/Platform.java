@@ -10,4 +10,6 @@ public interface Platform {
 	public void autoMove();
 	public Rectangle2D getCollider();
 	public BufferedImage getSprite();
+	public void setCurrentSpeed(int speed);
+	public double getcurrentSpeed();
 }

@@ -23,6 +23,10 @@ public class Fly extends Collisionable implements PowerUp {
 	public BufferedImage getSprite() {
 		return sprite;
 	}
+	
+	@Override
+	public void setCurrentSpeed(int speed) {
+	}
 
 	@Override
 	public void ActivateTrigger(Player target) {
@@ -30,6 +34,11 @@ public class Fly extends Collisionable implements PowerUp {
 			ActivatePower();
 			target.isFlying = true;
 		}
+	}
+	
+	@Override
+	public double getcurrentSpeed() {
+		return 0;
 	}
 
 }

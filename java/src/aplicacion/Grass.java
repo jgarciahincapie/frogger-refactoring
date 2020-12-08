@@ -30,4 +30,13 @@ public class Grass extends Collisionable{
 			}
 		}
 	}
+	
+	@Override
+	public void setCurrentSpeed(int speed) {
+	}
+	
+	@Override
+	public double getcurrentSpeed() {
+		return 0;
+	}
 }

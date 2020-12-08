@@ -33,5 +33,14 @@ public class Inmunidad extends Collisionable implements PowerUp {
 		}
 		
 	}
+	
+	@Override
+	public void setCurrentSpeed(int speed) {
+	}
+	
+	@Override
+	public double getcurrentSpeed() {
+		return 0;
+	}
 
 }

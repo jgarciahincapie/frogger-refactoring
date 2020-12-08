@@ -2,13 +2,15 @@ package aplicacion;
 
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public abstract class Player {
 
 	protected BufferedImage sprite, original;	
 	protected int x, y, posInicialX, posInicialY, width, height;
 	protected double speedX, speedY;
-	protected boolean isTrigger, isAlive, isRiding, isFlying, isToxic;
+	protected boolean isTrigger, isAlive, isRiding, isFlying, isToxic, isPregnant;
 	protected int player, score, lives;
 
 	public Player(int x, int y, int player, BufferedImage sprite) {
@@ -40,8 +42,26 @@ public abstract class Player {
 	}
 	
 	public void CheckWater() {
+		//Anti bugs
+		if(y == 80) speedY = 50;
+		
+		//Check Watter
 		if(y < 280 && y > 0 && !isRiding) {
-			Dead();		
+			if(!isFlying)
+				Dead();		
+			else {
+				Timer timer = new Timer();
+				TimerTask task = new TimerTask() {
+					
+					@Override
+					public void run() {
+						isFlying = false;
+						timer.cancel();
+					}
+				};
+				
+				timer.schedule(task, 2000, 1);
+			}
 		}
 	}	
 
@@ -163,6 +183,62 @@ public abstract class Player {
 
 	public void setLives(int lives) {
 		this.lives = lives;
+	}
+
+	public BufferedImage getOriginal() {
+		return original;
+	}
+
+	public void setOriginal(BufferedImage original) {
+		this.original = original;
+	}
+
+	public int getPosInicialX() {
+		return posInicialX;
+	}
+
+	public void setPosInicialX(int posInicialX) {
+		this.posInicialX = posInicialX;
+	}
+
+	public int getPosInicialY() {
+		return posInicialY;
+	}
+
+	public void setPosInicialY(int posInicialY) {
+		this.posInicialY = posInicialY;
+	}
+
+	public boolean isFlying() {
+		return isFlying;
+	}
+
+	public void setFlying(boolean isFlying) {
+		this.isFlying = isFlying;
+	}
+
+	public boolean isToxic() {
+		return isToxic;
+	}
+
+	public void setToxic(boolean isToxic) {
+		this.isToxic = isToxic;
+	}
+
+	public boolean isPregnant() {
+		return isPregnant;
+	}
+
+	public void setPregnant(boolean isPregnant) {
+		this.isPregnant = isPregnant;
+	}
+
+	public int getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(int player) {
+		this.player = player;
 	}
 
 

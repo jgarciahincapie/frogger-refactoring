@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import presentacion.Assets;
-import sun.net.www.content.audio.x_aiff;
 
 public class FroggerManager {
 
@@ -91,20 +90,20 @@ public class FroggerManager {
 				new StopPlace(30, 30), new StopPlace(200, 30), new StopPlace(370, 30), new StopPlace(540, 30), new StopPlace(710, 30),
 				//Trunks
 				//Largos inferiores
-				new Trunk(false, 0, 155, 170, 50, 2 + ronda), 
-				new Trunk(false, -300, 155, 170, 50, 2 + ronda), 
-				new Trunk(false, -600, 155, 170, 50, 2 + ronda),
+				new Trunk(false, 0, 175, 170, 50, 2 + ronda), 
+				new Trunk(false, -300, 175, 170, 50, 2 + ronda), 
+				new Trunk(false, -600, 175, 170, 50, 2 + ronda),
 				//Largos superiores
-				new Trunk(true, 900, 115, 170, 50, 1 + ronda), 
-				new Trunk(true, 300, 115, 170, 50, 1 + ronda), 
-				new Trunk(true, 600, 115, 170, 50, 1 + ronda),
+				new Trunk(true, 900, 75, 170, 50, 1 + ronda), 
+				new Trunk(true, 300, 75, 170, 50, 1 + ronda), 
+				new Trunk(true, 600, 75, 170, 50, 1 + ronda),
 				//Medianos
-				new Trunk(false, -100, 235, 100, 50, 1 + ronda), 
-				new Trunk(false, -300, 235, 100, 50, 1 + ronda), 
-				new Trunk(false, -500, 235, 100, 50, 1 + ronda), 
+				new Trunk(false, -100, 225, 100, 50, 1 + ronda), 
+				new Trunk(false, -300, 225, 100, 50, 1 + ronda), 
+				new Trunk(false, -500, 225, 100, 50, 1 + ronda), 
 				//Pequeños
-				new Trunk(false, -650, 235, 50, 50, 1 + ronda), 
-				new Trunk(false, -800, 235, 50, 50, 1 + ronda),
+				new Trunk(false, -650, 225, 50, 50, 1 + ronda), 
+				new Trunk(false, -800, 225, 50, 50, 1 + ronda),
 
 				//Cars
 				//Inferiores
@@ -120,37 +119,20 @@ public class FroggerManager {
 				new Car(false, -600, 330, 3 + ronda), 
 				new Carreta(false, -900, 330, 80, 50, 3 + ronda),
 
-
-				//Turtles sup
-				//Grupo 1 
-				new Turtle(false, 0, 75, 2 + ronda),
-				new Turtle(false, 50, 75, 2 + ronda), 
-				new Turtle(false, 100, 75, 2 + ronda),
-				//Grupo 2 
-				new Turtle(false, 300, 75, 2 + ronda), 
-				new Turtle(false, 350, 75, 2 + ronda),
-				//Grupo 3 
-				new Turtle(false, 550, 75, 2 + ronda), 
-				new Turtle(false, 600, 75, 2 + ronda), 
-				new Turtle(false, 650, 75, 2 + ronda), 
-				//Grupo 4
-				new Turtle(false, 950, 75, 2 + ronda), 
-				new Turtle(false, 1000, 75, 2 + ronda),
-				//Turtles inf
 				//Grupo 1
-				new Turtle(true, 0, 195, 2 + ronda),
-				new Turtle(true, 50, 195, 2 + ronda), 
-				new Turtle(true, 100, 195, 2 + ronda),
+				new Turtle(true, 0, 125, 2 + ronda),
+				new Turtle(true, 50, 125, 2 + ronda), 
+				new Turtle(true, 100, 125, 2 + ronda),
 				//Grupo 2
-				new Turtle(true, 300, 195, 2 + ronda), 
-				new Turtle(true, 350, 195, 2 + ronda),
+				new Turtle(true, 300, 125, 2 + ronda), 
+				new Turtle(true, 350, 125, 2 + ronda),
 				//Grupo 3
-				new Turtle(true, 550, 195, 2 + ronda), 
-				new Turtle(true, 600, 195, 2 + ronda), 
-				new Turtle(true, 650, 195, 2 + ronda), 
+				new Turtle(true, 550, 125, 2 + ronda), 
+				new Turtle(true, 600, 125, 2 + ronda), 
+				new Turtle(true, 650, 125, 2 + ronda), 
 				//Grupo 4
-				new Turtle(true, 950, 195, 2 + ronda), 
-				new Turtle(true, 1000, 195, 2 + ronda),
+				new Turtle(true, 950, 125, 2 + ronda), 
+				new Turtle(true, 1000, 125, 2 + ronda),
 
 				//Power Ups
 				new Acelerador(new Random().nextInt(750), 480, 50, 50),
@@ -184,14 +166,15 @@ public class FroggerManager {
 			//Time
 			DecreseTime();
 			//frogirl
-			if(time>=16 && ((Frogirl)frogirl).isTrigger) {		
+			if(time>=16 && !((Frogirl)frogirl).isSafe()) {		
 				((Frogirl)frogirl).Show();
 			}
 			
 			//MovePlayers
 			playerOne.Move();
 			playerOne.CheckWater();
-			if(playerTwo != null) {
+			if(playerTwo != null) {					
+				//Lives System
 				if(playerTwo.getLives() <= 0)
 					running = false;
 				else {
@@ -235,14 +218,13 @@ public class FroggerManager {
 		//Variables
 		running = true;
 		cont = 0;
+		frogirl = collisionables[collisionables.length -1];
 	}
 
 	private void nextRound() {
 
 		for(Collisionable i: collisionables) {
-			if(i instanceof Car) ((Car)i).setCurrentSpeed(((Car) i).getCurrentSpeed() + ronda);
-			if(i instanceof Turtle) ((Turtle)i).setCurrentSpeed(((Turtle) i).getCurrentSpeed() + ronda);
-			if(i instanceof Trunk) ((Trunk)i).setCurrentSpeed(((Trunk) i).getCurrentSpeed() + ronda);
+			if(i instanceof Platform) ((Platform)i).setCurrentSpeed((int)((Platform)i).getcurrentSpeed() + ronda);
 		}
 
 		Reset();
@@ -357,7 +339,6 @@ public class FroggerManager {
 	}
 
 	public void setMachine1(String machine1) {
-		System.out.println("Fijo machine 1: " + machine1);
 		this.machine1 = machine1;
 	}
 

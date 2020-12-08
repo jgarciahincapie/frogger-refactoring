@@ -10,3 +10,47 @@ Fecha: 8 Dec 2020 02:04:06 GMT
 1/120
 Modo: 1
 Score Player 1: 0
+Fecha: 8 Dec 2020 02:18:21 GMT
+1/120
+Modo: 1
+Score Player 1: 0
+Fecha: 8 Dec 2020 02:26:51 GMT
+1/120
+Modo: 1
+Score Player 1: 0
+Fecha: 8 Dec 2020 02:27:25 GMT
+1/120
+Modo: 1
+Score Player 1: 0
+Fecha: 8 Dec 2020 02:27:25 GMT
+1/120
+Modo: 1
+Score Player 1: 0
+Fecha: 8 Dec 2020 02:29:24 GMT
+1/120
+Modo: 1
+Score Player 1: 0
+Fecha: 8 Dec 2020 02:29:39 GMT
+1/120
+Modo: 1
+Score Player 1: 0
+Fecha: 8 Dec 2020 02:30:02 GMT
+1/120
+Modo: 1
+Score Player 1: 0
+Fecha: 8 Dec 2020 02:30:30 GMT
+1/120
+Modo: 1
+Score Player 1: 0
+Fecha: 8 Dec 2020 02:30:59 GMT
+1/120
+Modo: 1
+Score Player 1: 0
+Fecha: 8 Dec 2020 03:15:06 GMT
+Modo: 4
+Score Player 1: 30
+Score Player 2:0
+Fecha: 8 Dec 2020 03:16:59 GMT
+Modo: 3
+Score Player 1: 30
+Score Player 2:0

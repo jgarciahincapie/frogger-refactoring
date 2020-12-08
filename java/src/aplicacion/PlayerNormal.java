@@ -8,6 +8,7 @@ public class PlayerNormal extends Player{
 	
 	public PlayerNormal(int x, int y, int player, BufferedImage sprite) {
 		super(x, y, player, sprite);
+		isTrigger = true;
 	}
 
 	@Override
@@ -21,12 +22,12 @@ public class PlayerNormal extends Player{
 			if(EventosKeyboard.up && getY() > 50){
 				OnCollisionExit();
 				this.score +=10;
-				this.y -= getY() >= 280 ? speedY : speedY - 12;
+				this.y -= speedY;
 				EventosKeyboard.up = false;
 			}
 			else if(EventosKeyboard.down && getY() < 450) {
 				OnCollisionExit();
-				this.y += getY() >= 280 ? speedY : speedY - 12;
+				this.y += speedY;
 				EventosKeyboard.down = false;
 			}
 			else if(EventosKeyboard.left && getX() > 25) {
@@ -44,12 +45,12 @@ public class PlayerNormal extends Player{
 			if(EventosKeyboard.upArrow && getY() > 50){
 				OnCollisionExit();
 				this.score +=10;
-				this.y -= getY() >= 280 ? speedY : speedY - 12;
+				this.y -= speedY;
 				EventosKeyboard.upArrow = false;
 			}
 			else if(EventosKeyboard.downArrow && getY() < 450) {
 				OnCollisionExit();
-				this.y += getY() >= 280 ? speedY : speedY - 12;
+				this.y += speedY;
 				EventosKeyboard.downArrow = false;
 			}
 			else if(EventosKeyboard.leftArrow && getX() > 25) {

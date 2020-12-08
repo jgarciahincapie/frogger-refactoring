@@ -41,6 +41,16 @@ public class Biker extends Collisionable implements Platform{
 	}
 	
 	@Override
+	public void setCurrentSpeed(int speed) {
+		currentSpeed = speed;
+	}
+	
+	@Override
+	public double getcurrentSpeed() {
+		return currentSpeed;
+	}
+	
+	@Override
 	public BufferedImage getSprite() {
 		return sprite;
 	}

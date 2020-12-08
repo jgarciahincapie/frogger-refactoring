@@ -73,6 +73,17 @@ public class Car extends Collisionable implements Platform{
 		setTrigger(true);
 		sprite = null;
 	}
+	
+	@Override
+	public void setCurrentSpeed(int speed) {
+		currentSpeed = speed;
+	}
+	
+	@Override
+	public double getcurrentSpeed() {
+		return currentSpeed;
+	}
+	
 	@Override
 	public Rectangle2D getCollider() {
 		return new Rectangle2D.Double(x, y, width, height);
@@ -123,17 +134,7 @@ public class Car extends Collisionable implements Platform{
 		this.height = height;
 	}
 
-	public double getCurrentSpeed() {
-		return currentSpeed;
-	}
-
-	public void setCurrentSpeed(double currentSpeed) {
-		this.currentSpeed = currentSpeed;
-	}
-
 	public void setSprite(BufferedImage sprite) {
 		this.sprite = sprite;
 	}
-
-
 }

@@ -60,8 +60,14 @@ public class StopPlace extends Collisionable{
 	
 	public void Win(Player target, int bonus) {
 		sprite = Assets.froggy;
-		if(!isTrigger())
-			target.makePoint(bonus);
+		if(!isTrigger()) {
+			if(target.isPregnant) {
+				target.makePoint(bonus + 450);
+				target.setPregnant(false);
+			}
+			else
+				target.makePoint(bonus);
+		}
 		isTrigger = true;
 		win = true;
 	}
@@ -99,6 +105,15 @@ public class StopPlace extends Collisionable{
 	public void setSprite(BufferedImage sprite) {
 		this.sprite = sprite; 
 		
+	}
+
+	@Override
+	public void setCurrentSpeed(int speed) {		
+	}
+	
+	@Override
+	public double getcurrentSpeed() {
+		return 0;
 	}
 
 }

@@ -51,6 +51,16 @@ public class Trunk extends Collisionable{
 	}
 	
 	@Override
+	public void setCurrentSpeed(int speed) {
+		currentSpeed = speed;
+	}
+	
+	@Override
+	public double getcurrentSpeed() {
+		return currentSpeed;
+	}
+	
+	@Override
 	public Rectangle2D getCollider() {
 		return new Rectangle2D.Double(x, y, width, height);	
 	}

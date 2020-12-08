@@ -74,6 +74,16 @@ public class Turtle extends Collisionable implements Platform{
 		}
 	}
 	
+	@Override
+	public void setCurrentSpeed(int speed) {
+		
+	}
+	
+	@Override
+	public double getcurrentSpeed() {
+		return currentSpeed;
+	}
+	
 	public void Hide() {
 		Timer timer = new Timer();
 		TimerTask task1 = new TimerTask() {

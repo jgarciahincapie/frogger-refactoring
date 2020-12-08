@@ -32,5 +32,15 @@ public class Toxicity extends Collisionable implements PowerUp {
 			target.setSprite(Assets.playerToxic);
 		}
 	}
+	
+	@Override
+	public void setCurrentSpeed(int speed) {
+		
+	}
+	
+	@Override
+	public double getcurrentSpeed() {
+		return 0;
+	}
 
 }
