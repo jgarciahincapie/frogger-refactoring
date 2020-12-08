@@ -36,26 +36,26 @@ public class FroggerManagertTest {
 	
 	@Test
 	public void deberiaCrearLaPantallaDelJuegoConUnJugador() {
-		gameGui = new GameGUI(1, Assets.playerToxic, null);
+		gameGui = new GameGUI(1, Assets.playerToxic, null, null);
 		assertTrue(gameGui != null);
 	}
 	
 	@Test
 	public void deberiaCrearLaPantallaDelJuegoConDosJugadores() {
-		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic);
+		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic, null);
 		assertTrue(gameGui != null);
 	}
 	
 	@Test
 	public void deberiaInstanciarUnNuevoJugadorAlIniciarElJuegoEnModo1() {
-		gameGui = new GameGUI(1, Assets.playerToxic, null);
+		gameGui = new GameGUI(1, Assets.playerToxic, null, null);
 		Player player = gameGui.getPlayer1();
 		assertTrue(player != null);
 	}
 	
 	@Test
 	public void deberiaInstanciarDosNuevosJugadoresAlIniciarElJuegoEnModo2() {
-		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic);
+		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic, null);
 		Player player = gameGui.getPlayer1();
 		Player player2 = gameGui.getPlayer2();
 		assertTrue(player != null && player2 != null);
@@ -63,14 +63,14 @@ public class FroggerManagertTest {
 	
 	@Test
 	public void elJuegoDeberiaPreapararLosElementosGraficosParaMostrarEnPantalla() {
-		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic);
+		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic, null);
 		Collisionable[] itemsCollisionables = gameGui.getCollisionables();
 		assertTrue(itemsCollisionables.length >0);
 	}
 	
 	@Test
 	public void elJugadorDeberiaMoverseHaciaElNorte() {
-		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic);
+		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic, null);
 		Player player = gameGui.getPlayer1();
 		int lastY = player.getY();
 		EventosKeyboard.up = true;
@@ -82,7 +82,7 @@ public class FroggerManagertTest {
 	
 	@Test
 	public void elJugadorDeberiaMoverseHaciaElSur() {
-		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic);
+		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic, null);
 		Player player = gameGui.getPlayer1();
 		player.setY(400);
 		int lastY = player.getY();
@@ -95,7 +95,7 @@ public class FroggerManagertTest {
 	
 	@Test
 	public void elJugadorDeberiaMoverseHaciaElEste() {
-		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic);
+		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic, null);
 		Player player = gameGui.getPlayer1();
 		int lastX = player.getX();
 		EventosKeyboard.rigth = true;
@@ -107,7 +107,7 @@ public class FroggerManagertTest {
 	
 	@Test
 	public void elJugadorDeberiaMoverseHaciaElOeste() {
-		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic);
+		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic, null);
 		Player player = gameGui.getPlayer1();
 		int lastX = player.getX();
 		EventosKeyboard.left = true;
@@ -119,7 +119,7 @@ public class FroggerManagertTest {
 	
 	@Test
 	public void elJugadorDeberiaMorir() {
-		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic);
+		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic, null);
 		Player player = gameGui.getPlayer1();
 		int lives = player.getLives();
 		player.Dead();
@@ -130,7 +130,7 @@ public class FroggerManagertTest {
 	
 	@Test
 	public void elJugadorDeberiaReiniciarSuPosicionEnX() {
-		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic);
+		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic, null);
 		Player player = gameGui.getPlayer1();
 		int lastX = player.getX();
 		EventosKeyboard.left = true;
@@ -144,7 +144,7 @@ public class FroggerManagertTest {
 	
 	@Test
 	public void elJugadorDeberiaReiniciarSuPosicionEnY() {
-		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic);
+		gameGui = new GameGUI(2, Assets.playerToxic, Assets.playerErotic, null);
 		Player player = gameGui.getPlayer1();
 		int lastY = player.getY();
 		EventosKeyboard.left = true;

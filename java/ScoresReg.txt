@@ -54,3 +54,23 @@ Fecha: 8 Dec 2020 03:16:59 GMT
 Modo: 3
 Score Player 1: 30
 Score Player 2:0
+Fecha: 8 Dec 2020 03:28:18 GMT
+1/120
+Modo: 1
+Score Player 1: 0
+Fecha: 8 Dec 2020 03:28:33 GMT
+1/120
+Modo: 1
+Score Player 1: 30
+Fecha: 8 Dec 2020 03:29:21 GMT
+1/120
+Modo: 1
+Score Player 1: 0
+Fecha: 8 Dec 2020 03:30:10 GMT
+1/120
+Modo: 1
+Score Player 1: 0
+Fecha: 8 Dec 2020 03:31:35 GMT
+1/120
+Modo: 1
+Score Player 1: 0

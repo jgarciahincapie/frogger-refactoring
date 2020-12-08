@@ -1,6 +1,8 @@
 package aplicacion;
 
 import java.awt.image.BufferedImage;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import presentacion.Assets;
 
@@ -87,10 +89,10 @@ public class PlayerNormal extends Player{
 	@Override
 	public void Dead() {
 		sprite = Assets.playerDead;
+		isTrigger = false;
 		lives--;
 		score -= score-100>0 ? 100 : score;
 		resetPosition();
-		isTrigger = false;
 	}
 
 }
