@@ -20,8 +20,19 @@ El estándar ISO/IEC 5055 se centra en la calidad del código fuente y define me
 #### JUnit
 JUnit es un marco de pruebas unitarias para Java que facilita la creación y ejecución de pruebas unitarias. Se propone utilizar JUnit para implementar pruebas unitarias en el proyecto, siguiendo las recomendaciones del modelo de Frogger Test Debt.
 
-#### SonarQube
-SonarQube es una herramienta de análisis estático del código que permite identificar y corregir problemas de calidad del código de manera automatizada. Se recomienda integrar SonarQube en el proceso de desarrollo para mejorar la calidad del código y mantener altos estándares de calidad.
+#### SonarLint
+SonarLint es una herramienta de análisis estático del código que permite identificar y corregir problemas de calidad del código de manera automatizada. Se recomienda integrar SonarLint en el proceso de desarrollo para mejorar la calidad del código y mantener altos estándares de calidad.
+Como parte del analisis sobre el código de Frogger pudimos observar estos resultados 
+
+![img.png](img.png)
+
+La mayoria de los errores presentes en el codigo son:
+* Variables no utilizadas
+* Bloques de código duplicados
+* Violaciones de convenciones de codificación
+* Código muerto
+* Problemas de rendimiento
+* Falta de comentarios y documentación
 
 #### AI EvoSuite
 EvoSuite es una herramienta revolucionaria que automatiza la creación de pruebas JUnit para clases Java, priorizando la cobertura de código, especialmente la cobertura de ramas. Utiliza un enfoque evolutivo basado en algoritmos genéticos para adaptarse y generar suites de pruebas eficientes. Destaca por su capacidad para minimizar las pruebas unitarias generadas, mejorando su legibilidad, y por incluir afirmaciones de regresión que validan el comportamiento actual de las clases bajo prueba, garantizando la efectividad de las pruebas.
